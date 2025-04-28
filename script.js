@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Générer un offset X aléatoire pour chaque section
   sections.forEach(sec => {
-    const randX = Math.random() * 40 - 20; // entre -20px et +20px
+    const randX = Math.random() * 100 - 50; // entre -50px et +50px
     sec.dataset.offsetX = randX;
   });
 
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(sec => {
       if (sec.id === id) {
         sec.style.display = 'block';
-        sec.style.transform = `translateX(${sec.dataset.offsetX}px) translateY(-5px)`;
+        sec.style.transform = `translateX(${sec.dataset.offsetX}px) translateY(-15px)`;
       } else {
         sec.style.display = 'none';
       }
