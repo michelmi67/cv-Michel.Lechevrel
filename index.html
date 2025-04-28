@@ -1,286 +1,35 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CV Interactif - Michel Lechevrel</title>
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-color: #006bb3;
-      --primary-color-dark: #005c99;
-      --bg-color: #f2f6fa;
-      --card-bg: #ffffff;
-      --text-color: #333333;
-      --font-base: 'Roboto', sans-serif;
-      --radius: 8px;
-      --spacing: 1.2rem;
-    }
-
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: var(--font-base);
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.5;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: var(--spacing) auto;
-      background: var(--card-bg);
-      padding: calc(var(--spacing) * 1.5);
-      border-radius: var(--radius);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .container:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: var(--spacing);
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--primary-color);
-    }
-
-    header p {
-      margin: 0.5rem 0;
-      font-weight: 500;
-      color: var(--text-color);
-    }
-
-    .contact {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .contact a, .contact span {
-      font-size: 0.95rem;
-      text-decoration: none;
-      color: var(--text-color);
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
-
-    .contact a:hover {
-      color: var(--primary-color-dark);
-      transform: scale(1.05);
-    }
-
-    section {
-      margin-bottom: var(--spacing);
-    }
-
-    section h2 {
-      position: relative;
-      margin-bottom: 0.5rem;
-      padding-bottom: 0.2rem;
-      font-size: 1.4rem;
-      color: var(--primary-color);
-    }
-
-    section h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 50px;
-      height: 3px;
-      background: var(--primary-color);
-      border-radius: var(--radius);
-    }
-
-    details {
-      margin-top: 1rem;
-      padding: 0.8rem;
-      background: #fbfcfd;
-      border-radius: var(--radius);
-      border: 1px solid #e0e6ed;
-      transition: background 0.3s ease;
-    }
-
-    details[open] {
-      background: #eef4fb;
-      border-color: var(--primary-color);
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: 600;
-      position: relative;
-      padding-left: 1.5rem;
-      list-style: none;
-      transition: color 0.3s ease;
-    }
-
-    summary:hover {
-      color: var(--primary-color-dark);
-    }
-
-    /* Custom arrow */
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    summary:before {
-      content: '▸';
-      position: absolute;
-      left: 0;
-      top: 2px;
-      transform-origin: center;
-      transition: transform 0.3s ease;
-      color: var(--primary-color);
-    }
-
-    details[open] summary:before {
-      transform: rotate(90deg);
-    }
-
-    ul {
-      margin: 0.8rem 0 0 1.2rem;
-      padding: 0;
-      list-style-type: disc;
-    }
-
-    .skills, .languages, .interests {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 0.5rem;
-    }
-
-    .tag {
-      background: var(--primary-color);
-      color: #fff;
-      padding: 0.3rem 0.8rem;
-      border-radius: var(--radius);
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: background 0.3s ease;
-    }
-
-    .tag:hover {
-      background: var(--primary-color-dark);
-    }
-
-    @media (max-width: 600px) {
-      header h1 { font-size: 2rem; }
-      .container { padding: var(--spacing); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon CV Numérique</title>
+    <!-- Lien vers le fichier CSS externe -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
     <header>
-      <h1>Michel Lechevrel</h1>
-      <p>Coordinateur / Chef d'Équipe Sécurité Incendie, Malveillance et Assistance à Personne</p>
-      <div class="contact">
-        <a href="tel:+33688696758">📞 06 88 69 67 58</a>
-        <a href="mailto:michel.lechevrel@gmail.com">✉ michel.lechevrel@gmail.com</a>
-        <span>📍 Oberhoffen-sur-Moder, Grand Est</span>
-        <a href="https://linkedin.com/in/michel-lechevrel" target="_blank">🔗 linkedin.com/in/michel-lechevrel</a>
-      </div>
+        <h1>Lechevrel Michel</h1>
+        <p class="subtitle">Développeur Web</p>
     </header>
-    <section id="profil">
-      <h2>Profil</h2>
-      <p>Professionnel de la sécurité avec plus d’une dizaine d'expériences, spécialisé dans le management d’équipe sécurité incendie (SSIAP 2), prévention de malveillance et d’assistance à personne. Formateur et spécialiste informatique. Recherche un poste de Chef d'équipe sécurité où je pourrai mettre à profit mes compétences en leadership et mon expertise technique pour garantir la sécurité des biens et des personnes.</p>
-    </section>
+
     <section id="experience">
-      <h2>Expérience Professionnelle</h2>
-      <details open>
-        <summary>Chef d’équipe sécurité incendie, sûreté et d’assistance à personne - Sécuritas (2025 - Aujourd’hui)</summary>
-        <ul>
-          <li>Management d'une équipe de 7 agents</li>
-          <li>Mise en place de l’IA : automatisation, chatbot sécurité</li>
-        </ul>
-      </details>
-      <details>
-        <summary>Agent de maîtrise sécurité - Askadis Pro (2024 - 2025)</summary>
-        <ul>
-          <li>Remplacement de chef d’équipe incendie, sûreté et d'assistance à personne</li>
-          <li>Vidéosurveillance</li>
-        </ul>
-      </details>
-      <details>
-        <summary>Chef d’équipe sécurité incendie, sûreté et d’assistance à personne - Auchan Strasbourg Hautepierre (2018 - 2021)</summary>
-        <ul>
-          <li>Management d'une équipe de 20-25 agents</li>
-          <li>Mise en œuvre et suivi des procédures de prévention incendie</li>
-          <li>Formateur : incendie, malveillance</li>
-          <li>Gestion de l’informatique</li>
-        </ul>
-      </details>
-      <details>
-        <summary>Agent de sécurité incendie, sûreté et d’assistance à personne (2013 - 2018)</summary>
-        <ul>
-          <li>Mise en œuvre des procédures de prévention incendie</li>
-          <li>Acte de secourisme : plus d’une centaine</li>
-          <li>Divers postes incendie et malveillance : PC, ronde incendie, arrière caisse</li>
-        </ul>
-      </details>
-      <details>
-        <summary>Agent de prévention et de sécurité - DIP Geispolsheim (2011 - 2013)</summary>
-        <ul>
-          <li>Arrière caisse et contrôle client entrée/sortie de clients en magasin</li>
-          <li>Intervention en cas d’acte malveillant</li>
-        </ul>
-      </details>
+        <h2>Expérience</h2>
+        <!-- Ajoutez vos expériences ici -->
     </section>
+
     <section id="formation">
-      <h2>Formation</h2>
-      <ul>
-        <li>Formation IA (autodidacte)</li>
-        <li>BAC+2 Développement web</li>
-        <li>SSIAP 2</li>
-        <li>SSIAP 1</li>
-        <li>CQP APS</li>
-      </ul>
+        <h2>Formation</h2>
+        <!-- Ajoutez votre formation ici -->
     </section>
+
     <section id="competences">
-      <h2>Compétences</h2>
-      <div class="skills">
-        <span class="tag">Leadership</span>
-        <span class="tag">Management</span>
-        <span class="tag">Organisation</span>
-        <span class="tag">Formateur</span>
-        <span class="tag">Compétence informatique</span>
-      </div>
+        <h2>Compétences</h2>
+        <!-- Ajoutez vos compétences ici -->
     </section>
-    <section id="interets">
-      <h2>Centre d'Intérêt</h2>
-      <div class="interests">
-        <span class="tag">YouTube</span>
-        <span class="tag">Technologie</span>
-      </div>
-    </section>
-    <section id="langues">
-      <h2>Langues</h2>
-      <div class="languages">
-        <span class="tag">Français (natif)</span>
-        <span class="tag">Anglais (B2)</span>
-      </div>
-    </section>
-  </div>
+
+    <footer>
+        <p>Contact : email@example.com | Téléphone : 06 00 00 00 00</p>
+    </footer>
 </body>
 </html>
