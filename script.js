@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const sections = document.querySelectorAll('main section');
   const links = document.querySelectorAll('nav a');
 
-  // Générer un offset X aléatoire pour chaque section
+  // Générer un offset X aléatoire très important pour chaque section
   sections.forEach(sec => {
-    const randX = Math.random() * 100 - 50; // entre -50px et +50px
+    const randX = Math.random() * 500 - 250; // entre -250px et +250px
     sec.dataset.offsetX = randX;
   });
 
@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(sec => {
       if (sec.id === id) {
         sec.style.display = 'block';
-        sec.style.transform = `translateX(${sec.dataset.offsetX}px) translateY(-15px)`;
+        // décalage horizontal et vertical plus marqués
+        sec.style.transform = `translateX(${sec.dataset.offsetX}px) translateY(-30px)`;
       } else {
         sec.style.display = 'none';
       }
