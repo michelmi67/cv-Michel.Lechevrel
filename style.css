@@ -1,0 +1,38 @@
+/* Style global */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    /* Arrière-plan : placez l'image fournie dans le même dossier sous le nom background.png */
+    background: url('background.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* En-tête */
+header {
+    text-align: center;
+    padding: 60px 20px;
+    background: rgba(0, 0, 0, 0.5);
+}
+header h1 {
+    margin: 0;
+    font-size: 3em;
+}
+.subtile {
+    font-size: 1.2em;
+    color: #aaa;
+}
+
+/* Sections */
+section {
+    padding: 40px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    margin: 20px;
+    border-radius: 10px;
+}
+
+/* Pied de page */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
