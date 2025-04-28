@@ -16,55 +16,44 @@ body {
   background: rgba(0, 0, 0, 0.6);
 }
 .site-header h1 { font-size: 3em; }
-.site-header .subtitle {
-  font-size: 1.2em;
-  color: #ccc;
-  margin-top: 5px;
-}
+.site-header .subtitle { font-size: 1.2em; color: #ccc; margin-top: 5px; }
 .site-header nav { margin-top: 15px; }
-ul.menu {
-  list-style: none;
-  display: inline-flex;
-  gap: 15px;
-}
+ul.menu { list-style: none; display: inline-flex; gap: 15px; }
 ul.menu li a {
   display: block;
   padding: 8px 18px;
   border-radius: 25px;
-  background: rgba(255, 255, 255, 0.1);
-  text-decoration: none;
+  background: rgba(255,255,255,0.1);
   color: #fff;
   font-weight: 500;
-  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+  transition: transform .3s, background .3s, box-shadow .3s;
 }
-ul.menu li a:hover {
-  background: linear-gradient(45deg, #00bfff, #1e90ff);
+ul.menu li a:hover { background: linear-gradient(45deg,#00bfff,#1e90ff);
   transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(0, 191, 255, 0.6);
+  box-shadow: 0 4px 15px rgba(0,191,255,0.6);
 }
-ul.menu li a.active {
-  background: linear-gradient(45deg, #ff7f50, #ff4500);
-  box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6);
+ul.menu li a.active { background: linear-gradient(45deg,#ff7f50,#ff4500);
+  box-shadow:0 4px 15px rgba(255,69,0,0.6);
 }
 
-/* --- SECTIONS adaptives --- */
+/* --- SECTIONS adaptives 50% width et décalées --- */
 main section {
-  width: 100%;
+  width: 50%;
   margin: 20px auto;
   padding: 30px;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.5);
   border-radius: 10px;
-  transition: background 0.4s, transform 0.4s;
+  transition: background .4s, transform .4s;
 }
-/* Effet pour la section sélectionnée */
+/* décalage alternatif */
+main section:nth-of-type(odd) { margin-left: 5%; margin-right: auto; }
+main section:nth-of-type(even) { margin-left: auto; margin-right: 5%; }
+/* section sélectionnée */
 main section:target {
-  background: rgba(255, 127, 80, 0.3); /* semi-transparent orangé */
+  background: rgba(255,127,80,0.3);
   transform: translateY(-10px);
 }
 
 /* --- FOOTER --- */
-footer {
-  text-align: center;
-  padding: 15px;
-  background: rgba(0, 0, 0, 0.7);
-}
+footer { text-align: center; padding: 15px; background: rgba(0,0,0,0.7); }
