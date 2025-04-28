@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const sections = document.querySelectorAll('main section');
   const links = document.querySelectorAll('nav a');
 
-  // Générer un offset X aléatoire très important pour chaque section
+  // Générer un offset X aléatoire entre +100px et +900px
   sections.forEach(sec => {
-    const randX = Math.random() * 800 + 100; // entre 100px et +900px // entre 0px et +750px // entre -250px et +250px // entre -400px et +400px // entre -700px et +700px // entre -250px et +250px
+    const randX = Math.random() * 800 + 100; // entre 100px et 900px
     sec.dataset.offsetX = randX;
   });
 
@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(sec => {
       if (sec.id === id) {
         sec.style.display = 'block';
-        // décalage horizontal et vertical plus marqués
         sec.style.transform = `translateX(${sec.dataset.offsetX}px) translateY(-30px)`;
       } else {
         sec.style.display = 'none';
