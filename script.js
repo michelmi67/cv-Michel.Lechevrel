@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Générer un offset X aléatoire très important pour chaque section
   sections.forEach(sec => {
-    const randX = Math.random() * 1400 - 700; // entre -700px et +700px // entre -250px et +250px
+    const randX = Math.random() * 800 - 400; // entre -400px et +400px // entre -700px et +700px // entre -250px et +250px
     sec.dataset.offsetX = randX;
   });
 
