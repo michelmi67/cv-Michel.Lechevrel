@@ -1,5 +1,9 @@
 /* Reset global */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   font-family: Arial, sans-serif;
   color: #fff;
@@ -7,7 +11,7 @@ body {
   background-size: cover;
 }
 
-/* Header + Menu */
+/* Header et menu */
 header#accueil {
   display: flex;
   flex-direction: column;
@@ -55,7 +59,7 @@ ul.menu li a.active {
   box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6);
 }
 
-/* Sections */
+/* Sections principales */
 main section {
   max-width: 800px;
   margin: 20px auto;
