@@ -1,4 +1,4 @@
-/* Reset et global */
+/* Reset global */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: Arial, sans-serif;
@@ -7,9 +7,11 @@ body {
   background-size: cover;
 }
 
-/* Header avec menu */
+/* Header + Menu */
 header#accueil {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 60px 20px 20px;
   background: rgba(0, 0, 0, 0.6);
 }
@@ -19,13 +21,13 @@ header#accueil h1 {
 header#accueil .subtitle {
   font-size: 1.2em;
   color: #ccc;
-  margin-bottom: 20px;
+  margin-top: 10px;
 }
-
-/* Menu pilules */
 nav {
-  display: inline-block;
-  margin-bottom: 30px;
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 ul.menu {
   list-style: none;
@@ -34,21 +36,26 @@ ul.menu {
 }
 ul.menu li a {
   display: block;
-  padding: 8px 16px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.15);
+  padding: 10px 20px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.1);
   text-decoration: none;
   color: #fff;
   font-weight: 500;
-  transition: background 0.3s, color 0.3s;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
 }
-ul.menu li a:hover,
-ul.menu li a:focus {
-  background: rgba(255, 255, 255, 0.3);
-  color: #00bfff; /* accent bleu clair */
+ul.menu li a:hover {
+  background: linear-gradient(45deg, #00bfff, #1e90ff);
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 191, 255, 0.6);
+}
+ul.menu li a.active {
+  background: linear-gradient(45deg, #ff7f50, #ff4500);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6);
 }
 
-/* Main sections */
+/* Sections */
 main section {
   max-width: 800px;
   margin: 20px auto;
