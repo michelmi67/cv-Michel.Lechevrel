@@ -1,74 +1,65 @@
-/* Réinitialisation et style global */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* Reset et global */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-    font-family: Arial, sans-serif;
-    color: #fff;
-    /* Arrière-plan : placez l'image fournie dans le même dossier sous le nom background.png */
-    background: url('background.png') no-repeat center center fixed;
-    background-size: cover;
-    /* Espace pour le menu fixe */
-    padding-top: 60px;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  background: url('background.png') no-repeat center center fixed;
+  background-size: cover;
 }
 
-/* Menu de navigation */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
-}
-.menu {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    padding: 15px 0;
-}
-.menu li {
-    margin: 0 20px;
-}
-.menu li a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-.menu li a:hover {
-    color: #1e90ff;
-}
-
-/* En-tête (Accueil) */
+/* Header avec menu */
 header#accueil {
-    text-align: center;
-    padding: 80px 20px;
-    background: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 60px 20px 20px;
+  background: rgba(0, 0, 0, 0.6);
 }
 header#accueil h1 {
-    font-size: 3em;
+  font-size: 3em;
 }
-.subtitle {
-    font-size: 1.2em;
-    color: #aaa;
+header#accueil .subtitle {
+  font-size: 1.2em;
+  color: #ccc;
+  margin-bottom: 20px;
 }
 
-/* Sections principales */
+/* Menu pilules */
+nav {
+  display: inline-block;
+  margin-bottom: 30px;
+}
+ul.menu {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+ul.menu li a {
+  display: block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: background 0.3s, color 0.3s;
+}
+ul.menu li a:hover,
+ul.menu li a:focus {
+  background: rgba(255, 255, 255, 0.3);
+  color: #00bfff; /* accent bleu clair */
+}
+
+/* Main sections */
 main section {
-    padding: 40px 20px;
-    background: rgba(0, 0, 0, 0.5);
-    margin: 20px auto;
-    max-width: 800px;
-    border-radius: 10px;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
 }
 
-/* Pied de page */
+/* Footer */
 footer {
-    text-align: center;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    margin-top: 40px;
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
 }
