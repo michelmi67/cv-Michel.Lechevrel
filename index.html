@@ -30,29 +30,27 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
       <p>Vestibulum at tellus vitae urna placerat convallis nec non sapien.</p>
       <p>Phasellus euismod augue at purus fermentum, ut accumsan nulla volutpat.</p>
-      <p>Nulla facilisi. Morbi pellentesque justo sit amet neque ultricies, a tincidunt urna cursus.</p>
+      <p>Nulla facilisi. Morbi pellentesque justo sit amet neque ultricies.</p>
     </section>
 
     <section id="experience">
       <h2>Expérience</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>
-      <p>Cras venenatis euismod malesuada. Nulla facilisi. Sed euismod, nisl ac tincidunt luctus.</p>
-      <p>Aenean sit amet justo at sapien bibendum convallis. Fusce vitae turpis nec urna volutpat efficitur nec in lacus.</p>
-      <p>Curabitur vehicula libero nec erat volutpat, non sodales justo mattis.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p>Cras venenatis euismod malesuada. Nulla facilisi.</p>
+      <p>Aenean sit amet justo at sapien bibendum convallis.</p>
+      <p>Curabitur vehicula libero nec erat volutpat.</p>
     </section>
 
     <section id="formation">
       <h2>Formation</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <p>Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor.</p>
+      <p>Phasellus imperdiet, nulla et dictum interdum.</p>
     </section>
 
     <section id="competences">
       <h2>Compétences</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <p>Sed cursus ante dapibus diam. Sed nisi.</p>
-      <p>Duis sagittis ipsum. Praesent mauris.</p>
-      <p>Maecenas nec odio et ante tincidunt tempus id eu lectus.</p>
+      <p>Sed cursus ante dapibus diam.</p>
     </section>
 
     <section id="contact">
@@ -62,29 +60,12 @@
     </section>
   </main>
 
-  <!-- FOOTER FIXÉ EN BAS -->
+  <!-- FOOTER FIXE EN BAS -->
   <footer>
     <p>&copy; 2025 Votre Nom</p>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const sections = document.querySelectorAll('main section');
-      const links = document.querySelectorAll('nav a');
-      function showSection(id) {
-        sections.forEach(sec => sec.style.display = (sec.id === id) ? 'block' : 'none');
-        links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-      }
-      showSection('accueil');
-      links.forEach(link => {
-        link.addEventListener('click', e => {
-          e.preventDefault();
-          const id = link.getAttribute('href').slice(1);
-          showSection(id);
-          history.replaceState(null, '', '#' + id);
-        });
-      });
-    });
-  </script>
+  <!-- Inclusion du script externe -->
+  <script src="script.js"></script>
 </body>
 </html>
