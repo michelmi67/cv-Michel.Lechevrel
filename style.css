@@ -1,33 +1,67 @@
-/* Style global */
-body {
+/* Réinitialisation et style global */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
     font-family: Arial, sans-serif;
     color: #fff;
     /* Arrière-plan : placez l'image fournie dans le même dossier sous le nom background.png */
     background: url('background.png') no-repeat center center fixed;
     background-size: cover;
+    /* Espace pour le menu fixe */
+    padding-top: 60px;
 }
 
-/* En-tête */
-header {
+/* Menu de navigation */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+.menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+}
+.menu li {
+    margin: 0 20px;
+}
+.menu li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+.menu li a:hover {
+    color: #1e90ff;
+}
+
+/* En-tête (Accueil) */
+header#accueil {
     text-align: center;
-    padding: 60px 20px;
+    padding: 80px 20px;
     background: rgba(0, 0, 0, 0.5);
 }
-header h1 {
-    margin: 0;
+header#accueil h1 {
     font-size: 3em;
 }
-.subtile {
+.subtitle {
     font-size: 1.2em;
     color: #aaa;
 }
 
-/* Sections */
-section {
+/* Sections principales */
+main section {
     padding: 40px 20px;
     background: rgba(0, 0, 0, 0.5);
-    margin: 20px;
+    margin: 20px auto;
+    max-width: 800px;
     border-radius: 10px;
 }
 
@@ -36,3 +70,5 @@ footer {
     text-align: center;
     padding: 20px;
     background: rgba(0, 0, 0, 0.7);
+    margin-top: 40px;
+}
