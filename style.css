@@ -126,8 +126,13 @@ footer {
 }
 
 @media (max-width: 768px) {
-  /* Portrait mobile: pas de décalage, menu column */
-  main section { width: 90%; padding: 20px; }
+  /* Mobile portrait: menu toujours horizontal avec espacement réduit */
+  ul.menu { flex-direction: row; gap: 10px; justify-content: center; }
+  ul.menu li a {
+    padding: 6px 12px;
+    font-size: 0.9em;
+  }
+}
   .profile { width: 100px; height: 100px; top: 10px; left: 10px; }
   .site-header { padding-top: 120px; }
   ul.menu { flex-direction: column; gap: 10px; }
