@@ -4,6 +4,8 @@
   src: url('stencil.woff2') format('woff2'),
        url('stencil.woff') format('woff'),
        url('stencil.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* --- Reset & Base --- */
@@ -24,7 +26,7 @@ body {
   position: relative;
   text-align: center;
   padding: 80px 20px 10px;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 2;
 }
 .profile {
@@ -35,7 +37,7 @@ body {
   height: 167px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid rgba(255,255,255,0.8);
+  border: 3px solid rgba(255, 255, 255, 0.8);
 }
 .site-header h1 { font-size: 3em; }
 .site-header .subtitle {
@@ -44,13 +46,14 @@ body {
   margin-top: 5px;
 }
 
-/* --- MENU : toujours horizontal --- */
+/* --- MENU : toujours horizontal sur desktop --- */
 ul.menu {
   list-style: none;
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
   gap: 15px;
   justify-content: center;
+  flex-wrap: nowrap;
 }
 ul.menu li a {
   padding: 8px 18px;
@@ -70,7 +73,7 @@ ul.menu li a.active {
   box-shadow: 0 4px 15px rgba(255,69,0,0.6);
 }
 
-/* --- MAIN with centered section --- */
+/* --- MAIN : section centrée --- */
 main {
   flex: 1 0 auto;
   display: flex;
@@ -92,7 +95,7 @@ main section:target {
   background: rgba(0,0,0,0.6);
 }
 
-/* --- FOOTER & SECONDARY PROFILE --- */
+/* --- FOOTER & PHOTO MICHEL --- */
 footer {
   position: fixed;
   bottom: 0;
@@ -102,6 +105,7 @@ footer {
   padding: 15px;
   background: rgba(0,0,0,0.7);
   z-index: 1;
+  position: relative;
 }
 .secondary-profile {
   position: absolute;
@@ -119,42 +123,15 @@ footer {
   .profile { width: 120px; height: 120px; }
   .secondary-profile { width: 150px; }
 }
-$1
-  /* Contact centré sous Expérience & Formation */
-  ul.menu {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  ul.menu li:nth-child(5) {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-  }
-$2
+@media (max-width: 768px) {
+  main section { width: 90%; padding: 20px; }
   .profile { width: 100px; height: 100px; top: 10px; left: 10px; }
   .site-header { padding-top: 120px; }
-  /* menu toujours horizontal avec espacement réduit */
-  ul.menu { flex-direction: row; gap: 10px; justify-content: center; }
-  ul.menu li a { padding: 6px 12px; font-size: 0.9em; }
+  /* Portrait mobile : centrer Contact sous Exp & Form */
+  ul.menu { display: grid; grid-template-columns: repeat(3, auto); grid-gap: 10px; justify-content: center; }
+  ul.menu li:nth-child(5) { grid-column: 2 / 4; justify-self: center; margin-top: 10px; }
 }
 @media (orientation: landscape) and (max-width: 768px) {
-  /* paysage mobile: + espace boutons */
   ul.menu { flex-direction: row; gap: 20px; justify-content: space-around; }
   ul.menu li a { padding: 10px 20px; font-size: 1em; }
-}
-
-* Ajustement pour mobile portrait : centrer Contact sous Expérience & Formation */
-@media (max-width: 768px) {
-ul.menu {
-display: grid;
-grid-template-columns: repeat(3, auto);
-grid-gap: 10px;
-justify-content: center;
-}
-ul.menu li:nth-child(5) {
-grid-column: 2 / 4;
-justify-self: center;
-margin-top: 10px;
-}
 }
