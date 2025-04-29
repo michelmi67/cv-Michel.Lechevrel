@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   sections.forEach(sec => {
     let randX = 0;
     if (!isMobile) {
-      // Desktop / tablette : -200 à +600 px
-      randX = Math.random() * 800 - 200;
+      // Desktop / tablette : -300 à +300 px
+      randX = Math.random() * 600 - 300;
     } else if (isLandscapeMobile) {
       // Mobile paysage : -200 à +200 px
       randX = Math.random() * 400 - 200;
