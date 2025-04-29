@@ -106,8 +106,8 @@ footer {
   position: fixed;
   bottom: 80px; /* au-dessus du footer */
   left: 20px;
-  width: 167px;
-  height: 167px;
+  width: 200px;
+  height: auto; /* conserver les proportions */
   /* photo non ronde */
   border-radius: 0;
   object-fit: cover;
