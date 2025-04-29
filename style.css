@@ -143,3 +143,18 @@ $2
   ul.menu { flex-direction: row; gap: 20px; justify-content: space-around; }
   ul.menu li a { padding: 10px 20px; font-size: 1em; }
 }
+
+* Ajustement pour mobile portrait : centrer Contact sous Expérience & Formation */
+@media (max-width: 768px) {
+ul.menu {
+display: grid;
+grid-template-columns: repeat(3, auto);
+grid-gap: 10px;
+justify-content: center;
+}
+ul.menu li:nth-child(5) {
+grid-column: 2 / 4;
+justify-self: center;
+margin-top: 10px;
+}
+}
