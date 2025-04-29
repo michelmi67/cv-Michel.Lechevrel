@@ -119,7 +119,26 @@ footer {
   .secondary-profile { width: 150px; }
 }
 @media (max-width: 768px) {
-  main section { width: 90%; padding: 20px; }
+  /* Menu en colonne et espacement plus grand pour mobile portrait */
+  ul.menu { flex-direction: column; gap: 10px; }
+  ul.menu li a {
+    padding: 6px 12px;
+    font-size: 0.9em;
+  }
+}
+
+/* Espacement supplémentaire des boutons en paysage mobile */
+@media (orientation: landscape) and (max-width: 768px) {
+  ul.menu {
+    flex-direction: row;
+    gap: 20px;
+    justify-content: space-around;
+  }
+  ul.menu li a {
+    padding: 10px 20px; /* plus d'espace autour du texte */
+    font-size: 1em;
+  }
+}
   .profile { width: 100px; height: 100px; top: 10px; left: 10px; }
   .site-header { padding-top: 120px; }
   ul.menu { flex-direction: column; gap: 10px; }
