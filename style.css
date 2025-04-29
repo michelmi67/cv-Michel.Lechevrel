@@ -1,28 +1,29 @@
-/* --- custom font face --- */
+/* --- reset & dégradés --- */
 @font-face {
   font-family: 'CustomStencil';
   src: url('stencil.woff2') format('woff2'),
        url('stencil.woff') format('woff'),
        url('stencil.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
 }
-
-/* --- reset & setup --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 100%; height: 100%; }
 body {
-  display: flex;
-  flex-direction: column;
   font-family: 'CustomStencil', Arial, sans-serif;
   color: #fff;
   background: url('background.png') no-repeat center center fixed;
   background-size: cover;
   overflow-x: hidden;
-  padding-bottom: 60px; /* pour footer */
+  padding-bottom: 60px;
 }
 
-/* --- HEADER + MENU --- */
+/* HEADER */
+.site-header {
+  position: relative;
+  text-align: center;
+  padding: 80px 20px 10px;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+}
 .profile {
   position: absolute;
   top: 20px;
@@ -31,23 +32,12 @@ body {
   height: 167px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid rgba(255,255,255,0.8);
+  border: 3px solid rgba(255, 255, 255, 0.8);
 }
-.site-header {
-  position: relative;
-  text-align: center;
-  padding: 80px 20px 10px;
-  background: rgba(0,0,0,0.6);
-  z-index: 2;
-}
-.site-header h1, .site-header .subtitle,
-ul.menu li a,
-main section {
-  font-family: 'CustomStencil', Arial, sans-serif;
-}
-.site-header h1 { font-size: 3em; }
-.site-header .subtitle { font-size: 1.2em; color: #ccc; margin-top: 5px; }
-.site-header nav { margin-top: 15px; }
+h1 { font-size: 3em; }
+.subtitle { font-size: 1.2em; color: #ccc; margin-top: 5px; }
+
+/* MENU */
 ul.menu {
   list-style: none;
   display: inline-flex;
@@ -56,66 +46,66 @@ ul.menu {
   justify-content: center;
 }
 ul.menu li a {
-  display: block;
   padding: 8px 18px;
   border-radius: 25px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
   text-decoration: none;
   transition: transform .3s, background .3s, box-shadow .3s;
 }
-ul.menu li a:hover { background: linear-gradient(45deg,#00bfff,#1e90ff); transform: scale(1.1); box-shadow:0 4px 15px rgba(0,191,255,0.6);} 
-ul.menu li a.active { background: linear-gradient(45deg,#ff7f50,#ff4500); box-shadow:0 4px 15px rgba(255,69,0,0.6);}  
+ul.menu li a:hover { background: linear-gradient(45deg, #00bfff, #1e90ff); transform: scale(1.1); box-shadow: 0 4px 15px rgba(0,191,255,0.6); }
+ul.menu li a.active { background: linear-gradient(45deg, #ff7f50, #ff4500); box-shadow: 0 4px 15px rgba(255,69,0,0.6); }
 
-/* --- MAIN (conteneur responsive) --- */
-main {
-  flex: 1;
-  position: relative;
-}
+/* MAIN */
+main { flex: 1; position: relative; }
 
-/* --- SECTIONS adaptives --- */
+/* SECTIONS centrées */
 main section {
   width: 50%;
   margin: 20px auto;
-  margin-left: 20%;
   padding: 30px;
   background: rgba(0,0,0,0.5);
   border-radius: 10px;
   transition: background .4s, transform .4s;
 }
-main section:target { background: rgba(255,127,80,0.3); }
+main section:target { background: rgba(0,0,0,0.6); }
 
-/* --- FOOTER FIXE --- */
-footer {
-  position: fixed; bottom: 0; left: 0; width: 100%;
-  text-align: center; padding: 15px;
-  background: rgba(0,0,0,0.7); z-index: 1;
-}
-
-/* --- PHOTO SECONDAIRE --- */
+/* SECONDARY IMAGE */
 .secondary-profile {
-  position: fixed; bottom: 80px; left: 20px;
-  width: 200px; height: auto; border-radius: 0;
-  object-fit: cover; border:3px solid rgba(255,255,255,0.8);
-  z-index: 2;
+  width: 200px;
+  height: auto;
+  position: static;
+  border: 3px solid rgba(255,255,255,0.8);
 }
 
-/* --- MEDIA QUERIES pour petits écrans --- */
+/* FOOTER */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+  background: rgba(0,0,0,0.7);
+  z-index: 1;
+}
+
+/* MEDIA QUERIES */
 @media (max-width: 1024px) {
-  main section { width: 70%; margin-left:15%; }
-  .profile { width: 120px; height:120px; }
-  .secondary-profile { width:150px; bottom:70px; }
+  main section { width: 70%; }
+  .profile { width: 120px; height: 120px; }
+  .secondary-profile { width: 150px; }
 }
 @media (max-width: 768px) {
-  main section { width: 90%; margin-left:5%; padding:20px; }
-  .profile { width: 100px; height:100px; top:10px; left:10px; }
+  main section { width: 90%; padding: 20px; }
+  .profile { width: 100px; height: 100px; top: 10px; left: 10px; }
   .site-header { padding-top: 120px; }
-  ul.menu { flex-direction: column; gap:10px; }
+  ul.menu { flex-direction: column; gap: 10px; }
 }
 @media (max-width: 480px) {
   .profile { display: none; }
   .secondary-profile { display: none; }
-  .site-header h1 { font-size:2em; }
-  .site-header .subtitle { font-size:1em; }
-  ul.menu li a { padding:6px 12px; font-size:0.9em; }
+  h1 { font-size: 2em; }
+  .subtitle { font-size: 1em; }
+  ul.menu li a { padding: 6px 12px; font-size: 0.9em; }
 }
