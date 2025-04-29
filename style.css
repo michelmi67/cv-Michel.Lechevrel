@@ -76,7 +76,11 @@ main {
 /* --- SECTIONS adaptives --- */
 main section {
   width: 50%;
-  margin: 20px auto;
+  /* margin-left: 20%;  <-- retirez ou commentez cette ligne */
+  margin: 20px auto;   /* ajoutez ceci pour centrer */
+  /* … */
+}
+
   margin-left: 20%;
   padding: 30px;
   background: rgba(0,0,0,0.5);
