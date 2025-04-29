@@ -33,100 +33,89 @@ body {
   object-fit: cover;
   border: 3px solid rgba(255,255,255,0.8);
 }
-
 .site-header {
-  position: relative; /* pour positionner l'image */
+  position: relative;
   text-align: center;
-  padding: 80px 20px 10px; /* ajusté pour laisser de l'espace pour l'image */
+  padding: 80px 20px 10px;
   background: rgba(0,0,0,0.6);
   z-index: 2;
 }
-.site-header h1 {
+.site-header h1, .site-header .subtitle,
+ul.menu li a,
+main section {
   font-family: 'CustomStencil', Arial, sans-serif;
-  font-size: 3em;
 }
-.site-header .subtitle {
-  font-family: 'CustomStencil', Arial, sans-serif;
-  font-size: 1.2em;
-  color: #ccc;
-  margin-top: 5px;
-}
+.site-header h1 { font-size: 3em; }
+.site-header .subtitle { font-size: 1.2em; color: #ccc; margin-top: 5px; }
 .site-header nav { margin-top: 15px; }
-
 ul.menu {
   list-style: none;
   display: inline-flex;
   gap: 15px;
-  font-family: 'CustomStencil', Arial, sans-serif;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-
 ul.menu li a {
   display: block;
   padding: 8px 18px;
   border-radius: 25px;
   background: rgba(255,255,255,0.1);
   color: #fff;
-  font-weight: 500;
   text-decoration: none;
   transition: transform .3s, background .3s, box-shadow .3s;
-  font-family: 'CustomStencil', Arial, sans-serif;
 }
-ul.menu li a:hover {
-  background: linear-gradient(45deg, #00bfff, #1e90ff);
-  transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(0,191,255,0.6);
-}
-ul.menu li a.active {
-  background: linear-gradient(45deg, #ff7f50, #ff4500);
-  box-shadow: 0 4px 15px rgba(255,69,0,0.6);
-}
+ul.menu li a:hover { background: linear-gradient(45deg,#00bfff,#1e90ff); transform: scale(1.1); box-shadow:0 4px 15px rgba(0,191,255,0.6);} 
+ul.menu li a.active { background: linear-gradient(45deg,#ff7f50,#ff4500); box-shadow:0 4px 15px rgba(255,69,0,0.6);}  
 
-/* --- CONTENEUR PRINCIPAL AVEC CENTRAGE VERTICAL --- */
+/* --- MAIN (conteneur responsive) --- */
 main {
   flex: 1;
-  display: flex;
-  align-items: center;      /* centrage vertical */
-  justify-content: flex-start;
   position: relative;
 }
 
-/* --- SECTIONS adaptives 50% width, marge pour photo --- */
+/* --- SECTIONS adaptives --- */
 main section {
   width: 50%;
-  margin: 0;                /* suppression des marges sup/inf */
-  margin-left: 20%;         /* espace pour photo */
+  margin: 20px auto;
+  margin-left: 20%;
   padding: 30px;
   background: rgba(0,0,0,0.5);
   border-radius: 10px;
   transition: background .4s, transform .4s;
-  font-family: 'CustomStencil', Arial, sans-serif;
 }
-/* section sélectionnée : orange translucide (déplacement géré en JS) */
-main section:target {
-  background: rgba(255,127,80,0.3);
-}
+main section:target { background: rgba(255,127,80,0.3); }
 
-/* --- FOOTER FIXE EN BAS --- */
+/* --- FOOTER FIXE --- */
 footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  padding: 15px;
-  background: rgba(0,0,0,0.7);
-  z-index: 1;
+  position: fixed; bottom: 0; left: 0; width: 100%;
+  text-align: center; padding: 15px;
+  background: rgba(0,0,0,0.7); z-index: 1;
 }
 
+/* --- PHOTO SECONDAIRE --- */
 .secondary-profile {
-  position: fixed;
-  bottom: 80px; /* au-dessus du footer */
-  left: 20px;
-  width: 200px;
-  height: auto; /* conserver les proportions */
-  /* photo non ronde */
-  border-radius: 0;
-  object-fit: cover;
-  border: 3px solid rgba(255,255,255,0.8);
+  position: fixed; bottom: 80px; left: 20px;
+  width: 200px; height: auto; border-radius: 0;
+  object-fit: cover; border:3px solid rgba(255,255,255,0.8);
   z-index: 2;
+}
+
+/* --- MEDIA QUERIES pour petits écrans --- */
+@media (max-width: 1024px) {
+  main section { width: 70%; margin-left:15%; }
+  .profile { width: 120px; height:120px; }
+  .secondary-profile { width:150px; bottom:70px; }
+}
+@media (max-width: 768px) {
+  main section { width: 90%; margin-left:5%; padding:20px; }
+  .profile { width: 100px; height:100px; top:10px; left:10px; }
+  .site-header { padding-top: 120px; }
+  ul.menu { flex-direction: column; gap:10px; }
+}
+@media (max-width: 480px) {
+  .profile { display: none; }
+  .secondary-profile { display: none; }
+  .site-header h1 { font-size:2em; }
+  .site-header .subtitle { font-size:1em; }
+  ul.menu li a { padding:6px 12px; font-size:0.9em; }
 }
