@@ -57,25 +57,36 @@ ul.menu li a:hover { background: linear-gradient(45deg, #00bfff, #1e90ff); trans
 ul.menu li a.active { background: linear-gradient(45deg, #ff7f50, #ff4500); box-shadow: 0 4px 15px rgba(255,69,0,0.6); }
 
 /* MAIN */
-main { flex: 1; position: relative; }
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+/* SECTIONS centrées */
 /* SECTIONS centrées */
 main section {
   width: 50%;
-  margin: 20px auto;
+  margin: 0;
   padding: 30px;
   background: rgba(0,0,0,0.5);
   border-radius: 10px;
   transition: background .4s, transform .4s;
 }
-main section:target { background: rgba(0,0,0,0.6); }
+main section:target {
+  background: rgba(0,0,0,0.6);
+}
 
-/* SECONDARY IMAGE */
+/* SECONDARY IMAGE dans footer à gauche */
 .secondary-profile {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
   width: 200px;
   height: auto;
-  position: static;
   border: 3px solid rgba(255,255,255,0.8);
+  z-index: 2;
 }
 
 /* FOOTER */
