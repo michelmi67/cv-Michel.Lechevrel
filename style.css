@@ -27,7 +27,6 @@ body {
   text-align: center;
   padding: 80px 20px 10px;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 2;
 }
 .profile {
   position: absolute;
@@ -40,13 +39,9 @@ body {
   border: 3px solid rgba(255, 255, 255, 0.8);
 }
 .site-header h1 { font-size: 3em; }
-.site-header .subtitle {
-  font-size: 1.2em;
-  color: #ccc;
-  margin-top: 5px;
-}
+.site-header .subtitle { font-size: 1.2em; color: #ccc; margin-top: 5px; }
 
-/* --- MENU : toujours horizontal sur desktop --- */
+/* --- MENU: toujours horizontal --- */
 ul.menu {
   list-style: none;
   display: flex;
@@ -73,13 +68,12 @@ ul.menu li a.active {
   box-shadow: 0 4px 15px rgba(255,69,0,0.6);
 }
 
-/* --- MAIN : section centrée --- */
+/* --- MAIN: section centrée --- */
 main {
   flex: 1 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
 /* --- SECTIONS --- */
@@ -104,8 +98,6 @@ footer {
   text-align: center;
   padding: 15px;
   background: rgba(0,0,0,0.7);
-  z-index: 1;
-  position: relative;
 }
 .secondary-profile {
   position: absolute;
@@ -114,7 +106,6 @@ footer {
   width: 200px;
   height: auto;
   border: 3px solid rgba(255,255,255,0.8);
-  z-index: 2;
 }
 
 /* --- MEDIA QUERIES --- */
@@ -124,14 +115,19 @@ footer {
   .secondary-profile { width: 150px; }
 }
 @media (max-width: 768px) {
+  /* Menu horizontal, contact centré sous 2e ligne */
   main section { width: 90%; padding: 20px; }
   .profile { width: 100px; height: 100px; top: 10px; left: 10px; }
   .site-header { padding-top: 120px; }
-  /* Portrait mobile : centrer Contact sous Exp & Form */
-  ul.menu { display: grid; grid-template-columns: repeat(3, auto); grid-gap: 10px; justify-content: center; }
-  ul.menu li:nth-child(5) { grid-column: 2 / 4; justify-self: center; margin-top: 10px; }
+  ul.menu { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  ul.menu li:nth-child(1) { order: 1; }
+  ul.menu li:nth-child(4) { order: 2; }
+  ul.menu li:nth-child(2) { order: 3; }
+  ul.menu li:nth-child(3) { order: 4; }
+  ul.menu li:nth-child(5) { order: 5; width: 100%; margin-top: 10px; }
+  ul.menu li a { padding: 6px 12px; font-size: 0.9em; }
 }
 @media (orientation: landscape) and (max-width: 768px) {
-  ul.menu { flex-direction: row; gap: 20px; justify-content: space-around; }
+  ul.menu { gap: 20px; justify-content: space-around; }
   ul.menu li a { padding: 10px 20px; font-size: 1em; }
 }
