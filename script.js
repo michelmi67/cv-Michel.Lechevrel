@@ -4,16 +4,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const sections = document.querySelectorAll('main section');
   const links = document.querySelectorAll('nav a');
 
-  // Générer un offset X en fonction de l'écran
+  // Définition des conditions
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const isLandscapeMobile = window.matchMedia('(orientation: landscape) and (max-width: 768px)').matches;
+
+  // Générer un offset X en fonction du format écran
   sections.forEach(sec => {
     let randX = 0;
-    if (window.matchMedia('(orientation: portrait) and (max-width: 768px)').matches) {
-      randX = 0;
-    } else if (window.matchMedia('(orientation: landscape) and (max-width: 768px)').matches) {
-      randX = Math.random() * 300 + 100; // 100px à 400px
-    } else {
-      randX = Math.random() * 500 + 100; // 100px à 600px
+    if (!isMobile) {
+      // Desktop / tablette : -200 à +600 px
+      randX = Math.random() * 800 - 200;
+    } else if (isLandscapeMobile) {
+      // Mobile paysage : -200 à +200 px
+      randX = Math.random() * 400 - 200;
     }
+    // Mobile portrait : randX reste à 0 (pas de décalage)
     sec.dataset.offsetX = randX;
   });
 
@@ -21,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
     sections.forEach(sec => {
       if (sec.id === id) {
         sec.style.display = 'block';
-        sec.style.transform = `translateX(${sec.dataset.offsetX}px) translateY(-30px)`;
+        const offsetX = sec.dataset.offsetX || 0;
+        sec.style.transform = `translateX(${offsetX}px) translateY(-30px)`;
       } else {
         sec.style.display = 'none';
       }
@@ -29,8 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
     links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
   }
 
+  // Initialisation
   const initial = location.hash.substring(1) || 'accueil';
   showSection(initial);
+
+  // Gestion du menu
   links.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
