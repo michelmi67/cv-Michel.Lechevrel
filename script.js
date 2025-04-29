@@ -4,9 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const sections = document.querySelectorAll('main section');
   const links = document.querySelectorAll('nav a');
 
-  // Générer un offset X aléatoire entre +100px et +900px
+  // Générer un offset X en fonction de l'écran
   sections.forEach(sec => {
-    const randX = Math.random() * 800 + 100; // entre 100px et 900px
+    let randX = 0;
+    if (window.matchMedia('(orientation: portrait) and (max-width: 768px)').matches) {
+      randX = 0;
+    } else if (window.matchMedia('(orientation: landscape) and (max-width: 768px)').matches) {
+      randX = Math.random() * 300 + 100; // 100px à 400px
+    } else {
+      randX = Math.random() * 500 + 100; // 100px à 600px
+    }
     sec.dataset.offsetX = randX;
   });
 
@@ -19,16 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sec.style.display = 'none';
       }
     });
-    links.forEach(link => {
-      link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-    });
+    links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
   }
 
-  // Afficher la section initiale (hash ou accueil)
   const initial = location.hash.substring(1) || 'accueil';
   showSection(initial);
-
-  // Gérer les clics
   links.forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
