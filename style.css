@@ -8,14 +8,15 @@ body {
   color: #fff;
   background: url('background.png') no-repeat center center fixed;
   background-size: cover;
+  overflow-x: hidden;
 }
 
-/* ========== Header & Profil ========== */
+/* ========== Header ========== */
 .site-header {
   position: relative;
   text-align: center;
   padding: 80px 20px 20px;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
 }
 .profile {
   position: absolute;
@@ -30,7 +31,7 @@ body {
 .site-header h1 { font-size: 3em; }
 .site-header .subtitle { font-size: 1.2em; color: #ccc; margin-top: 5px; }
 
-/* ========== Menu (toujours horizontal) ========== */
+/* ========== Menu ========== */
 ul.menu {
   list-style: none;
   display: flex;
@@ -66,7 +67,7 @@ main section {
 }
 main section:target { background: rgba(0,0,0,0.7); }
 
-/* ========== Footer & Photo secondaire ========== */
+/* ========== Footer & Secondary Image ========== */
 footer {
   position: fixed;
   bottom: 0;
@@ -84,66 +85,30 @@ footer {
   height: auto;
 }
 
-/* ========== Responsive ========== */
+/* ========== Responsive Styles ========== */
 @media (max-width: 1024px) {
   main section { width: 70%; }
-  .profile { width: 120px; height:120px; }
+  .profile { width: 120px; height: 120px; }
   .secondary-profile { width: 150px; }
 }
 
 @media (max-width: 768px) and (orientation: portrait) {
-  /* Portrait mobile : menu en grille pour placement précis */
+  /* Portrait mobile: horizontal menu wrap and spacing */
   ul.menu {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto;
-    gap: 10px 15px;
-    justify-items: center;
-    padding: 0;
-  }
-  ul.menu li {
-    list-style: none;
-    width: auto;
-  }
-  /* Ligne 1 : Accueil, Compétences, Expérience */
-  ul.menu li:nth-child(1) { grid-column: 1; grid-row: 1; }
-  ul.menu li:nth-child(4) { grid-column: 2; grid-row: 1; }
-  ul.menu li:nth-child(2) { grid-column: 3; grid-row: 1; }
-  /* Ligne 2 : Formation et Contact centré sous Expérience & Formation */
-  ul.menu li:nth-child(3) { grid-column: 1; grid-row: 2; }
-  ul.menu li:nth-child(5) {
-    grid-column: 2 / span 2;
-    grid-row: 2;
-  }
-  ul.menu li a {
-    padding: 6px 12px;
-    font-size: 0.9em;
-  }
-}
-  ul.menu li a {
-    padding: 8px 16px; /* un peu plus d'espace intérieur */
-    font-size: 1em;
-  }
-  /* Réordonnancement : Accueil, Compétences, Expérience, Formation */
-  ul.menu li:nth-child(1) { order: 1; }
-  ul.menu li:nth-child(4) { order: 2; } /* Compétences */
-  ul.menu li:nth-child(2) { order: 3; }
-  ul.menu li:nth-child(3) { order: 4; }
-  /* Contact centré sous Expérience & Formation */
-  ul.menu li:nth-child(5) {
-    order: 5;
-    width: 100%;
-    margin-top: 10px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 20px;
   }
-}
-  /* Ordre: Accueil, Compétences, Expérience, Formation */
+  ul.menu li a { padding: 8px 16px; font-size: 1em; }
+
+  /* Reorder menu items: Accueil, Compétences, Expérience, Formation */
   ul.menu li:nth-child(1) { order: 1; }
   ul.menu li:nth-child(4) { order: 2; }
   ul.menu li:nth-child(2) { order: 3; }
   ul.menu li:nth-child(3) { order: 4; }
-  /* Contact sous Expérience & Formation */
+
+  /* Contact centered below Expérience & Formation */
   ul.menu li:nth-child(5) {
     order: 5;
     width: 100%;
@@ -151,11 +116,10 @@ footer {
     display: flex;
     justify-content: center;
   }
-  ul.menu li a { padding: 6px 12px; font-size: 0.9em; }
 }
 
 @media (orientation: landscape) and (max-width: 768px) {
-  /* Paysage mobile: plus d'espace */
+  /* Landscape mobile: increased button spacing */
   ul.menu { gap: 20px; justify-content: space-around; }
   ul.menu li a { padding: 10px 20px; font-size: 1em; }
 }
