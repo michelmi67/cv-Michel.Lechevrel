@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Vérification initiale que les éléments nécessaires à l'image sont trouvés au chargement
   if (!profileImage || !header || !mainElement) {
-        console.error('Erreur: Éléments essentiels (profile, header, main) non trouvés au chargement.');
-        // Continuer l'exécution pour la navigation si possible, mais la logique d'image ne fonctionnera pas
-    }
+        console.error('Erreur: Éléments essentiels (profile, header, main) non trouvés au chargement. La logique de déplacement d\'image sera désactivée.');
+        // Continuer l'exécution pour la navigation si possible
+    }
 
 
   // Stocker l'emplacement d'origine de l'image dans le header si elle existe
@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobilePortraitMediaQuery = window.matchMedia('(max-width: 768px) and (orientation: portrait)');
 
 
-  // Fonction pour gérer le changement de mode (entrée/sortie du portrait mobile)
+  // --- Définition de la fonction pour gérer le changement de mode (déplacement image) ---
+  // CETTE FONCTION DOIT ÊTRE DÉFINIE UNE SEULE FOIS
   function handleMobilePortraitChange(mq) {
     console.log('handleMobilePortraitChange appelée. Match:', mq.matches);
 
@@ -38,25 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    if (mq.matches) {
-      // On est en mode portrait mobile
-
-      // Fonction pour gérer le changement de mode (entrée/sortie du portrait mobile)
-  function handleMobilePortraitChange(mq) {
-    console.log('handleMobilePortraitChange appelée. Match:', mq.matches);
-
-    // Fonction pour gérer le changement de mode (entrée/sortie du portrait mobile)
-  function handleMobilePortraitChange(mq) {
-    console.log('handleMobilePortraitChange appelée. Match:', mq.matches);
-
-    // Assurez-vous que les éléments critiques pour le déplacement existent avant de tenter de manipuler l'image
-    if (!profileImage || !header || !mainElement || !originalParent) {
-      console.error('Erreur: Éléments essentiels (profile, header, main) non trouvés au chargement.');
-      return;
-    }
-
-
-    if (mq.matches) {
+    if (mq.matches) { // <--- Début du bloc si la media query correspond (portrait mobile)
       // On est en mode portrait mobile
 
       // Si l'image est actuellement dans le header (son emplacement d'origine)
@@ -67,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         profileImage.classList.add('profile--mobile-portrait');
         mainElement.classList.add('main--after-profile-mobile');
 
-        // Logs pour vérifier l'ajout des classes (laissez-les pour l'instant)
+        // Logs pour vérifier l'ajout des classes (laissez-les pour l'instant)
         console.log('profileImage.classList APRES ADD :', profileImage.classList);
         console.log('mainElement.classList APRES ADD :', mainElement.classList);
 
@@ -88,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       // Si l'image n'est PAS dans le header, elle est déjà déplacée (état correct pour ce mode), ne rien faire.
 
-    } else { // <--- Correct else pour le if (mq.matches)
+    } else { // <--- Début du bloc si la media query ne correspond PAS (pas portrait mobile)
       // On n'est PAS en mode portrait mobile
       console.log('Mode portrait mobile inactif.');
 
@@ -134,9 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     } // <-- CORRECT: Ferme le bloc { else pour if (mq.matches)
   }
+  // --- Fin de la définition de la fonction handleMobilePortraitChange ---
+
 
   // --- Logique d'affichage des sections existante ---
-  // ... (cette partie reste inchangée)
+  // (Cette partie gère le display: none/block des sections et la transformation aléatoire)
 
   // Calcul des offsets aléatoires au chargement
   sections.forEach(sec => {
@@ -149,42 +134,53 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (currentIsLandscape) {
       randX = Math.random() * 400 - 200;
     } else {
-        randX = 0;
+        randX = 0; // Pas de décalage sur mobile portrait ou autres
     }
-    sec.dataset.offsetX = randX;
+    sec.dataset.offsetX = randX; // Stocke le décalage sur l'élément
   });
 
   // Fonction pour afficher une section spécifique
   function showSection(id) {
     sections.forEach(sec => {
+      // Masque toutes les sections sauf celle qui correspond à l'id cible
       sec.style.display = sec.id === id ? 'block' : 'none';
+
+      // Applique la transformation seulement à la section visible
       if (sec.id === id) {
+        // Récupère le décalage stocké, utilise 0 par défaut si non défini
         const offsetX = sec.dataset.offsetX || 0;
+        // Applique la transformation (décalage horizontal aléatoire + décalage vertical fixe de -30px)
         sec.style.transform = `translateX(${offsetX}px) translateY(-30px)`;
-      } // else { sec.style.transform = ''; }
+      } else {
+           // Optionnel: réinitialiser la transformation des sections cachées pour éviter des surprises futures
+           // sec.style.transform = '';
+       }
     });
+
+    // Gère la classe 'active' sur les liens de navigation
     links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
   }
 
   // --- Fin logique d'affichage des sections existante ---
 
 
-  // Déclencher la fonction de gestion de l'image et écouter les changements de la media query
+  // Déclencher la fonction de gestion de l'image au chargement de la page
+  // et écouter les changements de la media query par la suite
   console.log('Appel initial de handleMobilePortraitChange...');
   handleMobilePortraitChange(mobilePortraitMediaQuery);
-  mobilePortraitMediaQuery.addListener(handleMobilePortraitChange);
+  mobilePortraitMediaQuery.addListener(handleMobilePortraitChange); // Écoute les changements
 
 
   // Gérer l'affichage de la section initiale au chargement
-  const initial = location.hash.substring(1) || 'accueil';
-  showSection(initial);
+  const initial = location.hash.substring(1) || 'accueil'; // Récupère l'id de l'ancre dans l'URL, sinon utilise 'accueil'
+  showSection(initial); // Affiche la section initiale
 
   // Ajouter les écouteurs de clics sur les liens de navigation
   links.forEach(link => link.addEventListener('click', e => {
-    e.preventDefault();
-    const id = link.getAttribute('href').slice(1);
-    showSection(id);
-    history.replaceState(null, '', '#' + id);
+    e.preventDefault(); // Empêche le comportement par défaut du lien (saut direct)
+    const id = link.getAttribute('href').slice(1); // Récupère l'id cible (#accueil -> accueil)
+    showSection(id); // Affiche la section correspondante
+    history.replaceState(null, '', '#' + id); // Met à jour l'URL sans recharger la page
   }));
 
 });
