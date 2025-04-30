@@ -115,15 +115,36 @@ footer {
   .secondary-profile { width: 150px; }
 }
 @media (max-width: 768px) and (orientation: portrait) {
-  /* Portrait mobile : grid layout, swap positions of Competences and Contact under the three others */
+  /* Portrait mobile : grid layout, competence in row1 col2 */
   ul.menu {
     display: grid;
     grid-template-columns: repeat(3, auto);
-    grid-auto-rows: auto;
     grid-gap: 10px;
     justify-content: center;
     padding: 0;
   }
+  ul.menu li:nth-child(1) { grid-column: 1; grid-row: 1; }
+  ul.menu li:nth-child(4) { grid-column: 2; grid-row: 1; }
+  ul.menu li:nth-child(2) { grid-column: 3; grid-row: 1; }
+  /* Row2: contact under accueil & competence originally, but swapped -> contact first */
+  ul.menu li:nth-child(5) {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    margin-top: 10px;
+  }
+  /* Formation spans columns 2-3 in row2 */
+  ul.menu li:nth-child(3) {
+    grid-column: 2 / span 2;
+    grid-row: 2;
+    justify-self: center;
+    margin-top: 10px;
+  }
+  ul.menu li a {
+    padding: 6px 12px;
+    font-size: 0.9em;
+  }
+}
   /* Row 1: Accueil, Compétences, Expérience */
   ul.menu li:nth-child(1) { grid-column: 1; grid-row: 1; }
   ul.menu li:nth-child(4) { grid-column: 2; grid-row: 1; }
