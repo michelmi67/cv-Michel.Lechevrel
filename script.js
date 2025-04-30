@@ -45,6 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function handleMobilePortraitChange(mq) {
     console.log('handleMobilePortraitChange appelée. Match:', mq.matches);
 
+    // Fonction pour gérer le changement de mode (entrée/sortie du portrait mobile)
+  function handleMobilePortraitChange(mq) {
+    console.log('handleMobilePortraitChange appelée. Match:', mq.matches);
+
     // Assurez-vous que les éléments critiques pour le déplacement existent avant de tenter de manipuler l'image
     if (!profileImage || !header || !mainElement || !originalParent) {
       console.error('Erreur: Éléments essentiels (profile, header, main) non trouvés au chargement.');
@@ -84,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       // Si l'image n'est PAS dans le header, elle est déjà déplacée (état correct pour ce mode), ne rien faire.
 
-    } else {
+    } else { // <--- Correct else pour le if (mq.matches)
       // On n'est PAS en mode portrait mobile
       console.log('Mode portrait mobile inactif.');
 
@@ -94,43 +98,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Retirer les classes de style mobile
         profileImage.classList.remove('profile--mobile-portrait');
-        mainElement.classList.remove('main--after-profile-mobile');
+        mainElement.classList.remove('main--after-profile-mobile'); // <-- CORRECTION: mainElement ici
 
             // Logs pour vérifier le retrait des classes (laissez-les pour l'instant)
         console.log('profileImage.classList APRES REMOVE :', profileImage.classList);
-        console.log('mainElement.classList APRES REMOVE :', mainElement.classList);
+        console.log('mainElement.classList APRES REMOVE :', mainElement.classList); // <-- CORRECTION: mainElement ici
 
 
         // Remettre l'image à son emplacement d'origine dans le header
         try {
                 // Assurez-vous que originalParent existe avant d'essayer d'y insérer l'image
                 if (originalParent) {
-                    if (originalNextSibling) {
+                    if (originalNextSibling) { // <-- CORRECT: Ouvre un bloc {
                         // Si l'image n'était pas le dernier enfant, on l'insère avant son frère d'origine
                         originalParent.insertBefore(profileImage, originalNextSibling);
                         console.log('Image remise dans header avant nextSibling.');
-                        } else {
+                        } else { // <-- CORRECT: Ouvre un bloc {
                         // Si l'image était le dernier enfant, on l'ajoute simplement à la fin
                         originalParent.appendChild(profileImage);
                         console.log('Image remise dans header (appendChild).');
-                        }
+                        } // <-- CORRECT: Ferme le bloc { else
                     console.log('Nouveau parent de profileImage JUSTE APRES RETOUR :', profileImage.parentNode); // Log après retour
+                    } // <-- CORRECT: Ferme le bloc { if (originalNextSibling)
 
-                } else {
+                } else { // <-- CORRECT: Ouvre un bloc {
                  console.error('Erreur : originalParent non défini pour le retour.');
-                }
+                } // <-- CORRECT: Ferme le bloc { else (originalParent)
+
 
         } catch (e) {
           console.error('Erreur lors de l\'exécution du retour de l\'image :', e);
         }
 
-      }
-       // Si l'image est déjà dans le header, elle est dans son emplacement d'origine (état correct pour ce mode), ne rien faire.
-    }
+      } // <-- CORRECT: Ferme le bloc { if (profileImage.parentNode !== originalParent)
+
+    } // <-- CORRECT: Ferme le bloc { else pour if (mq.matches)
   }
 
   // --- Logique d'affichage des sections existante ---
-  // (Cette partie gère le display: none/block des sections et la transformation aléatoire)
+  // ... (cette partie reste inchangée)
 
   // Calcul des offsets aléatoires au chargement
   sections.forEach(sec => {
@@ -143,38 +149,30 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (currentIsLandscape) {
       randX = Math.random() * 400 - 200;
     } else {
-        randX = 0; // Pas de décalage sur mobile portrait ou autres
+        randX = 0;
     }
-    sec.dataset.offsetX = randX; // Stocke le décalage sur l'élément
+    sec.dataset.offsetX = randX;
   });
 
   // Fonction pour afficher une section spécifique
   function showSection(id) {
     sections.forEach(sec => {
       sec.style.display = sec.id === id ? 'block' : 'none';
-
-      // Applique la transformation seulement à la section visible
       if (sec.id === id) {
         const offsetX = sec.dataset.offsetX || 0;
         sec.style.transform = `translateX(${offsetX}px) translateY(-30px)`;
-      } else {
-           // Optionnel: réinitialiser la transformation des sections masquées
-           // sec.style.transform = '';
-       }
+      } // else { sec.style.transform = ''; }
     });
-
-    // Gère la classe 'active' sur les liens de navigation
     links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
   }
 
   // --- Fin logique d'affichage des sections existante ---
 
 
-  // Déclencher la fonction de gestion de l'image au chargement de la page
-  // et écouter les changements de la media query par la suite
+  // Déclencher la fonction de gestion de l'image et écouter les changements de la media query
   console.log('Appel initial de handleMobilePortraitChange...');
   handleMobilePortraitChange(mobilePortraitMediaQuery);
-  mobilePortraitMediaQuery.addListener(handleMobilePortraitChange); // Écoute les changements
+  mobilePortraitMediaQuery.addListener(handleMobilePortraitChange);
 
 
   // Gérer l'affichage de la section initiale au chargement
