@@ -3,60 +3,102 @@
 document.addEventListener('DOMContentLoaded', () => {
   const sections = document.querySelectorAll('main section');
   const links = document.querySelectorAll('nav a');
-  // const isMobile = window.matchMedia('(max-width: 768px)').matches; // Plus nécessaire ici
 
   // Sélectionner les éléments pour le déplacement de l'image
   const profileImage = document.querySelector('.profile');
   const header = document.querySelector('.site-header');
   const mainElement = document.querySelector('main');
 
+  // Vérification initiale que les éléments sont trouvés au chargement
+  console.log('Elements trouvés au chargement :', { profileImage, header, mainElement });
+
+
   // Stocker l'emplacement d'origine de l'image dans le header
-  const originalParent = profileImage.parentNode; // Devrait être le header
-  const originalNextSibling = profileImage.nextElementSibling; // L'élément qui venait après l'image, peut être null
+  const originalParent = profileImage ? profileImage.parentNode : null; // Vérifier si profileImage existe avant d'accéder à parentNode
+  const originalNextSibling = profileImage ? profileImage.nextElementSibling : null; // Vérifier si profileImage existe
+
 
   // Media Query pour détecter le mode portrait mobile
   const mobilePortraitMediaQuery = window.matchMedia('(max-width: 768px) and (orientation: portrait)');
 
+
   // Fonction pour gérer le changement de mode (entrée/sortie du portrait mobile)
   function handleMobilePortraitChange(mq) {
+    console.log('--- handleMobilePortraitChange appelée ---');
+    console.log('Media Query (mq.matches) :', mq.matches);
+
+    // Assurez-vous que les éléments critiques existent avant de continuer
+    if (!profileImage || !header || !mainElement || !originalParent) {
+      console.error('Erreur : Un ou plusieurs éléments nécessaires au déplacement ne sont pas trouvés.');
+      return; // Arrêtez la fonction si les éléments ne sont pas là
+    }
+
+
     if (mq.matches) {
       // On est en mode portrait mobile
+      console.log('Mode portrait mobile actif.');
+      console.log('Parent actuel de profileImage :', profileImage.parentNode);
+      console.log('Header de référence :', header);
+
+
       if (profileImage.parentNode === header) { // Si l'image est toujours dans le header (son emplacement d'origine)
+        console.log('Condition : profileImage est bien un enfant direct de header. Tentative de déplacement...');
+
         // Ajouter les classes pour appliquer les styles mobiles spécifiques
         profileImage.classList.add('profile--mobile-portrait');
         mainElement.classList.add('main--after-profile-mobile');
 
         // Déplacer l'image hors du header, juste avant main dans le DOM
-        // On l'insère avant l'élément main, qui est un frère du header
-        header.parentNode.insertBefore(profileImage, mainElement);
+        try { // Ajout d'un try...catch juste au cas où insertBefore échoue silencieusement
+          header.parentNode.insertBefore(profileImage, mainElement);
+          console.log('insertBefore exécuté. Vérifier l\'Inspecteur.');
+        } catch (e) {
+          console.error('Erreur lors de l\'exécution de insertBefore :', e);
+        }
+
+
+      } else {
+        console.log('Condition : profileImage N\'est PAS un enfant direct de header. Déplacement non nécessaire (ou déjà fait/dans un état inattendu).');
       }
+
     } else {
       // On n'est PAS en mode portrait mobile
+      console.log('Mode portrait mobile inactif.');
+
       if (profileImage.parentNode !== header) { // Si l'image a été déplacée hors du header par le script
+        console.log('Image actuellement hors du header. Tentative de remise en place...');
         // Retirer les classes de style mobile
         profileImage.classList.remove('profile--mobile-portrait');
         mainElement.classList.remove('main--after-profile-mobile');
 
         // Remettre l'image à son emplacement d'origine dans le header
-        if (originalNextSibling) {
-          // Si l'image n'était pas le dernier enfant, on l'insère avant son frère d'origine
-          originalParent.insertBefore(profileImage, originalNextSibling);
-        } else {
-          // Si l'image était le dernier enfant, on l'ajoute simplement à la fin
-          originalParent.appendChild(profileImage);
+        try { // Ajout d'un try...catch
+          if (originalNextSibling) {
+            // Si l'image n'était pas le dernier enfant, on l'insère avant son frère d'origine
+            originalParent.insertBefore(profileImage, originalNextSibling);
+            console.log('insertBefore (retour) exécuté avec nextSibling. Vérifier l\'Inspecteur.');
+          } else if (originalParent) { // Vérifier que originalParent existe
+            // Si l'image était le dernier enfant (ou si originalNextSibling est null pour une autre raison), on l'ajoute à la fin
+                originalParent.appendChild(profileImage);
+                console.log('appendChild (retour) exécuté. Vérifier l\'Inspecteur.');
+             } else {
+                 console.error('Erreur : originalParent non défini pour le retour.');
+             }
+        } catch (e) {
+          console.error('Erreur lors de l\'exécution du retour :', e);
         }
+
+      } else {
+        console.log('Image déjà dans le header.');
       }
     }
   }
 
   // --- Logique d'affichage des sections existante ---
+  // (Cette partie n'a pas été modifiée ici, mais assurez-vous qu'elle est présente dans votre script.js)
 
   sections.forEach(sec => {
-    // La logique de décalage aléatoire peut rester, elle s'appliquera au main section.
-    // La variable isMobile doit être re-définie ou passée si elle est utilisée ici,
-    // mais le code JS original ne l'utilise que pour le randX, qui peut être calculé ici.
     let randX = 0;
-    // Recalculer isMobile et isLandscape si randX dépend de l'état mobile/landscape
     const currentIsMobile = window.matchMedia('(max-width: 768px)').matches;
     const currentIsLandscape = window.matchMedia('(orientation: landscape) and (max-width: 768px)').matches;
 
@@ -68,39 +110,36 @@ document.addEventListener('DOMContentLoaded', () => {
     sec.dataset.offsetX = randX;
   });
 
-
   function showSection(id) {
     sections.forEach(sec => {
       sec.style.display = sec.id === id ? 'block' : 'none';
-      // Applique la transformation seulement à la section visible
       if (sec.id === id) {
-        // Assurez-vous que dataset.offsetX est bien défini (il l'est au chargement)
-        const offsetX = sec.dataset.offsetX || 0; // Utilise 0 si non défini pour une raison X
+        const offsetX = sec.dataset.offsetX || 0;
         sec.style.transform = `translateX(${offsetX}px) translateY(-30px)`;
-      } else {
-            // Réinitialiser la transformation des sections masquées si nécessaire
-            // sec.style.transform = ''; // Optionnel : réinitialiser la transform des sections cachées
-        }
+      } // else { sec.style.transform = ''; } // Optionnel
     });
     links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
   }
-
   // --- Fin logique d'affichage des sections existante ---
 
 
   // Déclencher la fonction au chargement de la page
+  console.log('Appel initial de handleMobilePortraitChange...');
   handleMobilePortraitChange(mobilePortraitMediaQuery);
 
   // Écouter les changements de la media query
-  mobilePortraitMediaQuery.addListener(handleMobilePortraitChange); // Utilise addListener pour la compatibilité
+  mobilePortraitMediaQuery.addListener(handleMobilePortraitChange);
 
   // Écouteurs de clics sur les liens de navigation existants
   const initial = location.hash.substring(1) || 'accueil';
-  showSection(initial); // Affiche la section initiale au chargement
+  showSection(initial);
   links.forEach(link => link.addEventListener('click', e => {
     e.preventDefault();
     const id = link.getAttribute('href').slice(1);
     showSection(id);
     history.replaceState(null, '', '#' + id);
   }));
+
+  // Assurez-vous que les références sont correctes même après le déplacement si nécessaire (rarement un problème)
+  // console.log('profileImage après setup initial:', profileImage);
 });
