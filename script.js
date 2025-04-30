@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // --- Définition de la fonction pour gérer le changement de mode (déplacement image) ---
-  // CETTE FONCTION DOIT ÊTRE DÉFINIE UNE SEULE FOIS
+  // CETTE FONCTION EST DÉFINIE UNE SEULE FOIS ET CONTIENT LES LOGIQUES POUR LES DEUX ÉTATS (portrait/autre)
   function handleMobilePortraitChange(mq) {
     console.log('handleMobilePortraitChange appelée. Match:', mq.matches);
 
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         // Déplacer l'image hors du header, juste avant main dans le DOM
-        try {
+        try { // <--- Début du bloc try
             // Assurez-vous que le parent du header existe (c'est le body) et que mainElement existe
             if (header.parentNode && mainElement) {
                 header.parentNode.insertBefore(profileImage, mainElement);
@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                  console.error('Erreur: Impossible de déplacer l\'image, parent du header ou mainElement manquant.');
             }
-        } catch (e) {
+        } catch (e) { // <--- CORRECT: Ajoutez le bloc catch ici
           console.error('Erreur lors de l\'exécution de insertBefore pour déplacer l\'image :', e);
-        }
+        } // <--- Fin du bloc catch
 
       }
       // Si l'image n'est PAS dans le header, elle est déjà déplacée (état correct pour ce mode), ne rien faire.
@@ -81,15 +81,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Retirer les classes de style mobile
         profileImage.classList.remove('profile--mobile-portrait');
-        mainElement.classList.remove('main--after-profile-mobile'); // <-- CORRECTION: mainElement ici
+        mainElement.classList.remove('main--after-profile-mobile');
 
             // Logs pour vérifier le retrait des classes (laissez-les pour l'instant)
         console.log('profileImage.classList APRES REMOVE :', profileImage.classList);
-        console.log('mainElement.classList APRES REMOVE :', mainElement.classList); // <-- CORRECTION: mainElement ici
+        console.log('mainElement.classList APRES REMOVE :', mainElement.classList);
 
 
         // Remettre l'image à son emplacement d'origine dans le header
-        try {
+        try { // <--- Début du bloc try
                 // Assurez-vous que originalParent existe avant d'essayer d'y insérer l'image
                 if (originalParent) {
                     if (originalNextSibling) { // <-- CORRECT: Ouvre un bloc {
@@ -109,9 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 } // <-- CORRECT: Ferme le bloc { else (originalParent)
 
 
-        } catch (e) {
+        } catch (e) { // <--- CORRECT: Ajoutez le bloc catch ici
           console.error('Erreur lors de l\'exécution du retour de l\'image :', e);
-        }
+        } // <--- Fin du bloc catch
 
       } // <-- CORRECT: Ferme le bloc { if (profileImage.parentNode !== originalParent)
 
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (currentIsLandscape) {
       randX = Math.random() * 400 - 200;
     } else {
-        randX = 0; // Pas de décalage sur mobile portrait ou autres
+        randX = 0;
     }
     sec.dataset.offsetX = randX; // Stocke le décalage sur l'élément
   });
