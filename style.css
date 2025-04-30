@@ -87,15 +87,20 @@ footer {
 
 /* ========== Responsive Portrait Mobile ========== */
 @media (max-width: 768px) and (orientation: portrait) {
-  /* Portrait mobile : menu en grille avec grid-gap pour espacer également lignes et colonnes */
+  /* Portrait mobile: menu wrap with equal spacing horizontally and vertically */
   ul.menu {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto;
-    grid-gap: 20px;
-    justify-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* 15px horizontal gap, 20px vertical gap */
+    gap: 20px 15px;
     padding: 0;
   }
+  ul.menu li a {
+    padding: 8px 16px;
+    font-size: 1em;
+  }
+}
   /* Ligne 1 : Accueil, Compétences, Expérience */
   ul.menu li:nth-child(1) { grid-column: 1 / 2; grid-row: 1; }
   ul.menu li:nth-child(4) { grid-column: 2 / 3; grid-row: 1; }
