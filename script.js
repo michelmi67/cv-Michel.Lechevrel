@@ -41,13 +41,30 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Header de référence :', header);
 
 
-      if (profileImage.parentNode === header) { // Si l'image est toujours dans le header (son emplacement d'origine)
-        console.log('Condition : profileImage est bien un enfant direct de header. Tentative de déplacement...');
+        if (profileImage.parentNode === header) {
+        console.log('Condition : profileImage est bien un enfant direct de header. Tentative de déplacement...');
 
-        // Ajouter les classes pour appliquer les styles mobiles spécifiques
-        profileImage.classList.add('profile--mobile-portrait');
-        mainElement.classList.add('main--after-profile-mobile');
+        // Ajouter les classes pour appliquer les styles mobiles spécifiques
+        profileImage.classList.add('profile--mobile-portrait');
+        mainElement.classList.add('main--after-profile-mobile');
 
+        // AJOUTEZ CES DEUX NOUVELLES LIGNES :
+        console.log('profileImage.classList APRES ADD :', profileImage.classList);
+        console.log('mainElement.classList APRES ADD :', mainElement.classList);
+
+
+        // Déplacer l'image hors du header, juste avant main dans le DOM
+        try {
+          header.parentNode.insertBefore(profileImage, mainElement);
+          console.log('insertBefore exécuté. Vérifier l\'Inspecteur.');
+          console.log('Nouveau parent de profileImage JUSTE APRES insertBefore :', profileImage.parentNode);
+        } catch (e) {
+          console.error('Erreur lors de l\'exécution de insertBefore :', e);
+        }
+
+      } else {
+        console.log('Condition : profileImage N\'est PAS un enfant direct de header. Déplacement non nécessaire (ou déjà fait/dans un état inattendu).');
+      }
         try {
           header.parentNode.insertBefore(profileImage, mainElement);
           console.log('insertBefore exécuté. Vérifier l\'Inspecteur.');
