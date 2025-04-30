@@ -1,32 +1,21 @@
-/* --- Font Face --- */
-@font-face {
-  font-family: 'CustomStencil';
-  src: url('stencil.woff2') format('woff2'),
-       url('stencil.woff') format('woff'),
-       url('stencil.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* --- Reset & Base --- */
+/* ========== Reset & Base ========== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 100%; height: 100vh; }
 body {
   display: flex;
   flex-direction: column;
-  font-family: 'CustomStencil', Arial, sans-serif;
+  font-family: Arial, sans-serif;
   color: #fff;
   background: url('background.png') no-repeat center center fixed;
   background-size: cover;
-  overflow-x: hidden;
 }
 
-/* --- HEADER --- */
+/* ========== Header & Profil ========== */
 .site-header {
   position: relative;
   text-align: center;
-  padding: 80px 20px 10px;
-  background: rgba(0, 0, 0, 0.6);
+  padding: 80px 20px 20px;
+  background: rgba(0,0,0,0.6);
 }
 .profile {
   position: absolute;
@@ -36,12 +25,12 @@ body {
   height: 167px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid rgba(255, 255, 255, 0.8);
+  border: 3px solid rgba(255,255,255,0.8);
 }
 .site-header h1 { font-size: 3em; }
 .site-header .subtitle { font-size: 1.2em; color: #ccc; margin-top: 5px; }
 
-/* --- MENU: toujours horizontal --- */
+/* ========== Menu (toujours horizontal) ========== */
 ul.menu {
   list-style: none;
   display: flex;
@@ -56,47 +45,35 @@ ul.menu li a {
   background: rgba(255,255,255,0.1);
   color: #fff;
   text-decoration: none;
-  transition: transform .3s, background .3s, box-shadow .3s;
+  transition: transform .3s, background .3s;
 }
-ul.menu li a:hover {
-  background: linear-gradient(45deg, #00bfff, #1e90ff);
-  transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(0,191,255,0.6);
-}
-ul.menu li a.active {
-  background: linear-gradient(45deg, #ff7f50, #ff4500);
-  box-shadow: 0 4px 15px rgba(255,69,0,0.6);
-}
+ul.menu li a:hover { transform: scale(1.1); background: rgba(255,255,255,0.2); }
+ul.menu li a.active { background: rgba(255,127,80,0.7); }
 
-/* --- MAIN: section centrée --- */
+/* ========== Main & Sections ========== */
 main {
-  flex: 1 0 auto;
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-/* --- SECTIONS --- */
 main section {
   width: 50%;
-  margin: 0;
   padding: 30px;
   background: rgba(0,0,0,0.5);
   border-radius: 10px;
-  transition: background .4s, transform .4s;
+  transition: background .4s;
 }
-main section:target {
-  background: rgba(0,0,0,0.6);
-}
+main section:target { background: rgba(0,0,0,0.7); }
 
-/* --- FOOTER & PHOTO MICHEL --- */
+/* ========== Footer & Photo secondaire ========== */
 footer {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  text-align: center;
   padding: 15px;
+  text-align: center;
   background: rgba(0,0,0,0.7);
 }
 .secondary-profile {
@@ -105,65 +82,29 @@ footer {
   left: 20px;
   width: 200px;
   height: auto;
-  border: 3px solid rgba(255,255,255,0.8);
 }
 
-/* --- MEDIA QUERIES --- */
+/* ========== Responsive ========== */
 @media (max-width: 1024px) {
   main section { width: 70%; }
-  .profile { width: 120px; height: 120px; }
+  .profile { width: 120px; height:120px; }
   .secondary-profile { width: 150px; }
 }
+
 @media (max-width: 768px) and (orientation: portrait) {
-  /* Portrait mobile : grid layout, competence in row1 col2 */
+  /* Portrait mobile: reposition menu */
   ul.menu {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    grid-gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    padding: 0;
+    gap: 10px;
   }
-  ul.menu li:nth-child(1) { grid-column: 1; grid-row: 1; }
-  ul.menu li:nth-child(4) { grid-column: 2; grid-row: 1; }
-  ul.menu li:nth-child(2) { grid-column: 3; grid-row: 1; }
-  /* Row2: contact under accueil & competence originally, but swapped -> contact first */
-  ul.menu li:nth-child(5) {
-    grid-column: 1;
-    grid-row: 2;
-    justify-self: start;
-    margin-top: 10px;
-  }
-  /* Formation spans columns 2-3 in row2 */
-  ul.menu li:nth-child(3) {
-    grid-column: 2 / span 2;
-    grid-row: 2;
-    justify-self: center;
-    margin-top: 10px;
-  }
-  ul.menu li a {
-    padding: 6px 12px;
-    font-size: 0.9em;
-  }
-}
-  /* Row 1: Accueil, Compétences, Expérience */
-  ul.menu li:nth-child(1) { grid-column: 1; grid-row: 1; }
-  ul.menu li:nth-child(4) { grid-column: 2; grid-row: 1; }
-  ul.menu li:nth-child(2) { grid-column: 3; grid-row: 1; }
-  /* Row 2: Formation, Contact centered under columns 2-3 */
-  ul.menu li:nth-child(3) { grid-column: 1; grid-row: 2; justify-self: start; }
-  ul.menu li:nth-child(5) { grid-column: 2 / span 2; grid-row: 2; justify-self: center; margin-top: 10px; }
-  ul.menu li a { padding: 6px 12px; font-size: 0.9em; }
-}
-  ul.menu li a {
-    padding: 6px 12px;
-    font-size: 0.9em;
-  }
-  /* Reorder: Accueil (1), Compétences (4), Expérience (2), Formation (3) */
+  /* Ordre: Accueil, Compétences, Expérience, Formation */
   ul.menu li:nth-child(1) { order: 1; }
   ul.menu li:nth-child(4) { order: 2; }
   ul.menu li:nth-child(2) { order: 3; }
   ul.menu li:nth-child(3) { order: 4; }
-  /* Contact centered below Expérience & Formation */
+  /* Contact sous Expérience & Formation */
   ul.menu li:nth-child(5) {
     order: 5;
     width: 100%;
@@ -171,9 +112,11 @@ footer {
     display: flex;
     justify-content: center;
   }
+  ul.menu li a { padding: 6px 12px; font-size: 0.9em; }
 }
 
-@media (orientation: landscape) and (max-width: 768px) { (orientation: landscape) and (max-width: 768px) {
+@media (orientation: landscape) and (max-width: 768px) {
+  /* Paysage mobile: plus d'espace */
   ul.menu { gap: 20px; justify-content: space-around; }
   ul.menu li a { padding: 10px 20px; font-size: 1em; }
 }
