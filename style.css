@@ -80,32 +80,42 @@ footer {
   width:200px; height:auto;
 }
 
+/* ===== Responsive Portrait ===== */
 @media (max-width: 768px) and (orientation: portrait) {
-  .desktop-menu { display: none; }
-  .mobile-menu {
-    display: flex;
-    flex-wrap: wrap; /* Important: permet de passer à la ligne */
-    justify-content: center; /* Centre les éléments horizontalement sur chaque ligne */
-    gap: 20px; /* Espacement entre les boutons (horizontal et vertical entre les lignes) */
-    align-items: center; /* AJOUTEZ CETTE LIGNE : Centre les éléments verticalement sur leur ligne */
-  }
+  .desktop-menu { display: none; }
+  .mobile-menu {
+    display: flex;
+    flex-wrap: wrap; /* Important: permet de passer à la ligne */
+    justify-content: center; /* Centre les éléments horizontalement sur chaque ligne */
+    gap: 20px; /* Espacement entre les boutons (horizontal et vertical entre les lignes) */
+    align-items: center; /* Centre les lignes d'éléments verticalement */
+  }
 
-  /* Premier groupe (Accueil, Expérience, Formation) */
-  .mobile-menu li:nth-child(1) { order: 1; } /* Accueil */
-  .mobile-menu li:nth-child(2) { order: 1; } /* Expérience */
-  .mobile-menu li:nth-child(3) { order: 1; } /* Formation */
+  /* NOUVELLE RÈGLE : Styles pour les éléments de liste dans le menu mobile */
+  .mobile-menu li {
+    min-height: 45px; /* Assure une hauteur minimale cohérente pour tous les li */
+    display: flex; /* Fait du li un conteneur flex */
+    align-items: center; /* Centre le contenu (le lien a) verticalement à l'intérieur du li */
+    justify-content: center; /* Centre le contenu (le lien a) horizontalement à l'intérieur du li */
+  }
 
-  /* Deuxième groupe (Compétences, Contact) */
-  .mobile-menu li:nth-child(4) {
-    order: 2; /* Compétences */
-    margin-top: 20px; /* Ajoute de l'espace au-dessus pour former la 2ème ligne visuellement */
-  }
-  .mobile-menu li:nth-child(5) {
-    order: 2; /* Contact */
-  }
 
-  /* Style des liens inchangé */
-  .mobile-menu li a { padding: 8px 16px; font-size: 1em; }
+  /* Premier groupe (Accueil, Expérience, Formation) - ordre inchangé */
+  .mobile-menu li:nth-child(1) { order: 1; } /* Accueil */
+  .mobile-menu li:nth-child(2) { order: 1; } /* Expérience */
+  .mobile-menu li:nth-child(3) { order: 1; } /* Formation */
+
+  /* Deuxième groupe (Compétences, Contact) - ordre inchangé */
+  .mobile-menu li:nth-child(4) {
+    order: 2; /* Compétences */
+    margin-top: 20px; /* Ajoute de l'espace au-dessus pour former la 2ème ligne visuellement */
+  }
+  .mobile-menu li:nth-child(5) {
+    order: 2; /* Contact */
+  }
+
+  /* Style des liens inchangé (le padding contribue à la taille, min-height s'ajuste) */
+  .mobile-menu li a { padding: 8px 16px; font-size: 1em; }
 }
 
 /* ===== Responsive Landscape ===== */
