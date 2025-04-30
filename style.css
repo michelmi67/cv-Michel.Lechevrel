@@ -81,26 +81,44 @@ footer {
 }
 
 /* ===== Responsive Portrait ===== */
+/* ===== Responsive Portrait ===== */
 @media (max-width: 768px) and (orientation: portrait) {
-  .desktop-menu { display:none; }
+  .desktop-menu { display: none; }
   .mobile-menu {
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:20px;
+    display: flex;
+    flex-wrap: wrap; /* Important: permet de passer à la ligne */
+    justify-content: center; /* Centre les éléments sur chaque ligne */
+    gap: 20px; /* Espacement entre les boutons */
+    /* Retirer les anciennes règles order */
+    /*
+      .mobile-menu li:nth-child(1) { order:1; }
+      .mobile-menu li:nth-child(4) { order:2; }
+      .mobile-menu li:nth-child(2) { order:3; }
+      .mobile-menu li:nth-child(3) { order:4; }
+    */
   }
-  /* Order: Accueil, Compétences, Expérience, Formation */
-  .mobile-menu li:nth-child(1) { order:1; }
-  .mobile-menu li:nth-child(4) { order:2; }
-  .mobile-menu li:nth-child(2) { order:3; }
-  .mobile-menu li:nth-child(3) { order:4; }
-  /* Contact centered below all three */
+
+  /* Premier groupe (Accueil, Expérience, Formation) */
+  /* On leur donne un order plus bas pour qu'ils apparaissent avant */
+  .mobile-menu li:nth-child(1) { order: 1; } /* Accueil */
+  .mobile-menu li:nth-child(2) { order: 1; } /* Expérience */
+  .mobile-menu li:nth-child(3) { order: 1; } /* Formation */
+
+  /* Deuxième groupe (Compétences, Contact) */
+  /* On leur donne un order plus élevé */
+  /* Le 4ème élément est le premier du second groupe, on lui ajoute une marge top */
+  .mobile-menu li:nth-child(4) {
+    order: 2; /* Compétences */
+    margin-top: 20px; /* Ajoute de l'espace au-dessus pour former la 2ème ligne visuellement */
+  }
   .mobile-menu li:nth-child(5) {
-    order:5;
-    width:100%; margin-top:10px;
-    display:flex; justify-content:center;
+    order: 2; /* Contact */
+    /* Retirer la règle qui lui donnait width: 100% */
+    /* width: 100%; margin-top: 10px; display: flex; justify-content: center; */
   }
-  .mobile-menu li a { padding:8px 16px; font-size:1em; }
+
+  /* Style des liens inchangé */
+  .mobile-menu li a { padding: 8px 16px; font-size: 1em; }
 }
 
 /* ===== Responsive Landscape ===== */
