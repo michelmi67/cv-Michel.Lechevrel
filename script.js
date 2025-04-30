@@ -48,13 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
         profileImage.classList.add('profile--mobile-portrait');
         mainElement.classList.add('main--after-profile-mobile');
 
-        // Déplacer l'image hors du header, juste avant main dans le DOM
-        try { // Ajout d'un try...catch juste au cas où insertBefore échoue silencieusement
-          header.parentNode.insertBefore(profileImage, mainElement);
-          console.log('insertBefore exécuté. Vérifier l\'Inspecteur.');
-        } catch (e) {
-          console.error('Erreur lors de l\'exécution de insertBefore :', e);
-        }
+        try {
+          header.parentNode.insertBefore(profileImage, mainElement);
+          console.log('insertBefore exécuté. Vérifier l\'Inspecteur.');
+          console.log('Nouveau parent de profileImage JUSTE APRES insertBefore :', profileImage.parentNode); // AJOUTEZ CETTE LIGNE
+        } catch (e) {
+          console.error('Erreur lors de l\'exécution de insertBefore :', e);
+        }
 
 
       } else {
