@@ -74,16 +74,34 @@ main section {
 main section:target { background:rgba(0,0,0,0.7); }
 
 /* ===== Footer & Secondary Image ===== */
+/* Footer & Secondary Image */
 footer {
-  position:fixed; bottom:0; left:0; width:100%;
-  padding:15px; text-align:center;
-  background:rgba(0,0,0,0.7);
-}
-.secondary-profile {
-  position:absolute; bottom:15px; left:20px;
-  width:200px; height:auto;
+  position: fixed; /* Le footer reste fixé en bas */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+  background: rgba(0,0,0,0.7);
+  z-index: 999; /* Assure que le footer est au-dessus du contenu principal si besoin */
 }
 
+.secondary-profile {
+  /* Changez la position de 'absolute' à 'fixed' */
+  position: fixed; /* <-- Ici, on la fixe par rapport à la fenêtre */
+  bottom: 15px; /* Positionne 15px du bas de la fenêtre */
+  left: 20px; /* Positionne 20px de la gauche de la fenêtre */
+  width: 200px;
+  height: auto;
+  z-index: 1000; /* Assure que l'image est au-dessus du footer si elle le chevauche */
+  /* Gardez les autres styles comme border-radius, object-fit, etc. si vous les avez ailleurs */
+}
+
+/* Assurez-vous que le body a suffisamment de padding-bottom si le footer fixe couvre du contenu */
+body {
+    /* ... vos autres styles de body ... */
+    padding-bottom: calc(30px + 15px); /* Ajustez : hauteur estimée du footer (ex: 30px) + padding bottom du footer (15px) */
+}
 /* ===== Responsive Portrait ===== */
 @media (max-width: 768px) and (orientation: portrait) {
 
