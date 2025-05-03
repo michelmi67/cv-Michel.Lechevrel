@@ -1,5 +1,188 @@
 /* ===== Reset & Base ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100vh; } /* Attention avec height: 100vh si le contenu dépasse l'écran */
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  background: url('background.png') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden; /* Attention si les sections sont transformées horizontalement */
+  /* Ajout du padding bottom pour le footer fixe */
+  padding-bottom: calc(30px + 15px); /* Ajustez si nécessaire */
+}
+
+/* ===== Header ===== */
+.site-header {
+  position: relative;
+  text-align: center;
+  padding: 80px 20px 20px;
+  background: rgba(0,0,0,0.6);
+}
+.profile {
+  position: absolute; /* Positionnement pour le desktop */
+  top: 20px; left: 20px; /* Ajustez si nécessaire pour le desktop */
+  width: 167px; height: 167px; /* Taille pour le desktop */
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.8);
+  z-index: 1; /* Pour s'assurer qu'elle est au-dessus des éléments du header si absolu */
+}
+.site-header h1 { font-size:3em; }
+.site-header .subtitle { font-size:1.2em; color:#ccc; margin-top:5px; }
+
+/* ===== Menu commun ===== */
+ul.menu {
+  list-style:none;
+}
+ul.menu li a {
+  display:block;
+  border-radius:25px;
+  background:rgba(255,255,255,0.1);
+  color:#fff; text-decoration:none;
+  transition:transform .3s, background .3s;
+}
+ul.menu li a:hover { transform:scale(1.1); background:rgba(255,255,255,0.2); }
+ul.menu li a.active { background:rgba(255,127,80,0.7); }
+
+/* ===== Desktop Menu ===== */
+.desktop-menu {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 0 auto; /* centrer le menu desktop */
+  flex-wrap: nowrap;
+}
+
+/* ===== Mobile Portrait Menu (hidden desktop) ===== */
+.mobile-menu {
+  display:none;
+}
+
+/* ===== Main & Sections ===== */
+main {
+  flex:1;
+  display:flex; /* Par défaut, main est flex */
+  align-items:center; /* Centre verticalement les sections (si flex) */
+  justify-content:center; /* Centre horizontalement les sections (si flex) */
+}
+main section {
+  width:50%; padding:30px;
+  background:rgba(0,0,0,0.5);
+  border-radius:10px;
+  transition:background .4s;
+  /* Les marges pour les sections en mode non portrait sont gérées par le centrage flexbox du main et le width:50% */
+}
+main section:target {
+  background:rgba(0,0,0,0.7);
+}
+
+/* Style de l'image secondaire */
+.secondary-profile {
+  position: fixed;
+  bottom: 15px;
+  left: 20px;
+
+  width: 150px; /* <-- Taille par défaut réduite pour l'ordinateur */
+  height: auto;
+
+  z-index: 1000;
+
+  /* --- J'enlève les styles qui rendaient la photo ovale --- */
+  /* border-radius: 50%; */
+  /* object-fit: cover; */
+  /* ---------------------------------------------------- */
+
+  /* Ajoutez ici d'autres styles que vous souhaitez */
+}
+
+/* Le footer reste fixé en bas */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  z-index: 999;
+}
+
+/* ===== Responsive Portrait ===== */
+@media (max-width: 768px) and (orientation: portrait) {
+
+  /* Styles du menu mobile */
+    .desktop-menu { display: none; }
+    .mobile-menu {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 20px; align-items: center;
+    }
+    .mobile-menu li { min-height: 45px; display: flex; align-items: center; justify-content: center; }
+    .mobile-menu li:nth-child(1) { order: 1; }
+    .mobile-menu li:nth-child(2) { order: 1; }
+    .mobile-menu li:nth-child(3) { order: 1; }
+    .mobile-menu li:nth-child(4) { order: 2; }
+    .mobile-menu li:nth-child(5) { order: 2; }
+    .mobile-menu li a { padding: 8px 16px; font-size: 1em; }
+
+
+  /* Photo de profil principale en portrait */
+  .profile {
+    position: static !important; /* Annule le positionnement absolu pour le flux normal */
+    margin-top: 20px; /* <-- MARGE ici */
+    margin-left: 20px; /* <-- MARGE ici */
+    margin-right: auto; /* Pousse vers la gauche */
+    margin-bottom: 20px; /* <-- MARGE ici */
+    width: 100px; /* Ajuste la taille pour le portrait */
+    height: 100px;
+    display: block; /* Nécessaire pour les marges auto et le positionnement static */
+    z-index: auto;
+  }
+
+  /* Ajustements pour le contenu principal (main) en portrait */
+  main {
+    display: block; /* Remet main en flux normal de bloc */
+    flex: 1; /* Garde la capacité de prendre l'espace vertical si body est flex column */
+    padding-top: 0;
+    /* align-items: stretch; */ /* Inutile avec display: block */
+    /* justify-content: flex-start; */ /* Inutile avec display: block */
+  }
+
+  /* Sections à l'intérieur du main en portrait */
+  main section {
+    width: 90%; /* Plus large en portrait */
+    margin: 20px auto; /* <-- MARGES qui DEVRAIENT centrer et espacer les sections */
+    padding: 20px;
+  }
+
+  /* Taille spécifique pour l'image secondaire en portrait */
+  .secondary-profile {
+    width: 100px; /* Taille réduite pour le portrait mobile */
+  }
+
+}
+
+
+/* ===== Responsive Landscape ===== */
+@media (orientation: landscape) and (max-width: 768px) {
+  .desktop-menu { display:none; }
+  .mobile-menu { gap:20px; justify-content:space-around; }
+  .mobile-menu li a { padding:10px 20px; font-size:1em; }
+  /* Taille spécifique pour l'image secondaire en paysage mobile si vous le souhaitez */
+  .secondary-profile {
+    width: 120px; /* Exemple */
+  }
+}
+
+/* ===== Tablet ===== */
+@media (max-width: 1024px) {
+  main section { width:70%; }
+  .profile { width:120px; height:120px; }
+  .secondary-profile { width:120px; } /* Taille ajustée pour tablette */
+}/* ===== Reset & Base ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
 html, body { width: 100%; height: 100vh; }
 body {
   display: flex;
