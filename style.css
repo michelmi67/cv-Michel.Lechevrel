@@ -71,7 +71,9 @@ main section {
   border-radius:10px;
   transition:background .4s;
 }
-main section:target { background:rgba(0,0,0,0.7); }
+main section:target { 
+  background:rgba(0,0,0,0.7); 
+}
 
 /* Style de l'image secondaire */
 .secondary-profile {
