@@ -90,8 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Remettre l'image à son emplacement d'origine dans le header
         try { // <--- Début du bloc try
-                // Assurez-vous que originalParent existe avant d'essayer d'y insérer l'image
-                if (originalParent) {
+    // Assurez-vous que originalParent existe avant d'essayer d'y insérer l'image
+    if (originalParent) {
                     if (originalNextSibling) { // <-- CORRECT: Ouvre un bloc {
                         // Si l'image n'était pas le dernier enfant, on l'insère avant son frère d'origine
                         originalParent.insertBefore(profileImage, originalNextSibling);
@@ -101,17 +101,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         originalParent.appendChild(profileImage);
                         console.log('Image remise dans header (appendChild).');
                         } // <-- CORRECT: Ferme le bloc { else
-                    console.log('Nouveau parent de profileImage JUSTE APRES RETOUR :', profileImage.parentNode); // Log après retour
+        console.log('Nouveau parent de profileImage JUSTE APRES RETOUR :', profileImage.parentNode); // Log après retour
                     } // <-- CORRECT: Ferme le bloc { if (originalNextSibling)
 
-                } else { // <-- CORRECT: Ouvre un bloc {
+                 else { // <-- CORRECT: Ouvre un bloc {
                  console.error('Erreur : originalParent non défini pour le retour.');
                 } // <-- CORRECT: Ferme le bloc { else (originalParent)
 
+    } catch (e) { // <--- CORRECT: Ajoutez le bloc catch ici
+        console.error('Erreur lors de l\'exécution du retour de l\'image :', e);
+    } // <--- Fin du bloc catch
 
-        } catch (e) { // <--- CORRECT: Ajoutez le bloc catch ici
-          console.error('Erreur lors de l\'exécution du retour de l\'image :', e);
-        } // <--- Fin du bloc catch
 
       } // <-- CORRECT: Ferme le bloc { if (profileImage.parentNode !== originalParent)
 
