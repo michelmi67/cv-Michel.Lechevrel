@@ -19,9 +19,13 @@ body {
   background: rgba(0,0,0,0.6);
 }
 .profile {
-  position: absolute; top:20px; left:20px;
-  width:167px; height:167px; border-radius:50%;
-  object-fit:cover; border:3px solid rgba(255,255,255,0.8);
+  position: absolute; /* Positionnement pour le desktop */
+  top: 20px; left: 20px; /* Ajustez si nécessaire pour le desktop */
+  width: 167px; height: 167px; /* Taille pour le desktop */
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.8);
+  z-index: 1; /* Pour s'assurer qu'elle est au-dessus des éléments du header si absolu */
 }
 .site-header h1 { font-size:3em; }
 .site-header .subtitle { font-size:1.2em; color:#ccc; margin-top:5px; }
@@ -82,55 +86,54 @@ footer {
 
 /* ===== Responsive Portrait ===== */
 @media (max-width: 768px) and (orientation: portrait) {
-  /* ... Vos règles actuelles pour le menu mobile, li, a ... */
-  .desktop-menu { display: none; }
-  .mobile-menu {
-    display: flex; flex-wrap: wrap; justify-content: center;
-    gap: 20px; align-items: center;
-  }
-  .mobile-menu li { min-height: 45px; display: flex; align-items: center; justify-content: center; }
-  .mobile-menu li:nth-child(1) { order: 1; }
-  .mobile-menu li:nth-child(2) { order: 1; }
-  .mobile-menu li:nth-child(3) { order: 1; }
-  .mobile-menu li:nth-child(4) { order: 2; margin-top: 20px; }
-  .mobile-menu li:nth-child(5) { order: 2; }
-  .mobile-menu li a { padding: 8px 16px; font-size: 1em; }
+
+  /* Vos styles pour le menu mobile (.mobile-menu, li, li a) ... */
+    .desktop-menu { display: none; }
+    .mobile-menu {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 20px; align-items: center;
+    }
+    .mobile-menu li { min-height: 45px; display: flex; align-items: center; justify-content: center; }
+    .mobile-menu li:nth-child(1) { order: 1; }
+    .mobile-menu li:nth-child(2) { order: 1; }
+    .mobile-menu li:nth-child(3) { order: 1; }
+    .mobile-menu li:nth-child(4) { order: 2; margin-top: 20px; }
+    .mobile-menu li:nth-child(5) { order: 2; }
+    .mobile-menu li a { padding: 8px 16px; font-size: 1em; }
 
 
-  /* NOUVELLES RÈGLES POUR LA GESTION PAR JS */
+  /* CORRIGÉ : Styles pour la photo de profil (maintenant hors du header) */
+  .profile {
+    position: static !important; /* <-- CORRIGÉ : Annule le positionnement absolu avec !important */
+    margin-top: 20px; /* Espace sous le header */
+    margin-left: 20px; /* Alignement à gauche */
+    margin-right: auto; /* Pousse l'image vers la gauche */
+    margin-bottom: 20px; /* Espace avant le main */
+    width: 100px; /* Ajuste la taille pour le mode portrait */
+    height: 100px;
+    display: block; /* S'assure qu'elle se comporte comme un bloc pour les marges auto */
+    /* Garde border-radius, object-fit, border du style de base */
+    z-index: auto; /* Réinitialise z-index car n'est plus positionné */
+  }
 
-  /* Style de l'image de profil quand elle est déplacée par JS */
-  .profile--mobile-portrait { /* Cette classe sera ajoutée par JS */
-    position: static !important; /* Annule le positionnement absolu de base */
-    margin-top: 20px; /* Espace sous le header */
-    margin-left: 20px; /* Alignement à gauche */
-    margin-right: auto; /* Pousse vers la gauche */
-    margin-bottom: 20px; /* Espace au-dessus de main */
-    width: 100px; /* Ajuste la taille */
-    height: 100px;
-    display: block; /* S'assure qu'elle se comporte comme un bloc pour les marges auto */
-    /* Les autres styles (border-radius, etc.) sont déjà dans la règle .profile de base */
-  }
+  /* Ajustements pour le contenu principal (main) - Nécessaires car l'image est sortie du header */
+  main {
+    display: block; /* Remet main en block flow */
+    flex: 1; /* Maintient sa flexibilité si body est flex column */
+    padding-top: 0; /* Ajustez si besoin */
+    align-items: stretch; /* Ces règles étaient pour display:flex, vous pouvez les laisser mais elles n'ont plus d'effet direct */
+    justify-content: flex-start; /* Idem */
+  }
 
-  /* Style de la balise main quand l'image est déplacée avant elle */
-  .main--after-profile-mobile { /* Cette classe sera ajoutée par JS */
-    display: block; /* Annule le display: flex de base sur main */
-    flex: 1; /* Garde sa capacité à prendre l'espace restant */
-    padding-top: 0; /* Ajuste le padding si nécessaire */
-    /* Les align-items/justify-content de main n'ont plus d'effet ici */
-  }
-
-  /* Ajustement des sections à l'intérieur du main modifié */
-  main.main--after-profile-mobile section {
-    width: 90%; /* Plus large en portrait */
-    margin: 20px auto; /* Centrer et espacer verticalement */
-    padding: 20px; /* Ajuster padding */
-  }
-
-  /* La règle section:target est inchangée */
-  /* main section:target { background: rgba(0,0,0,0.7); } */
+  /* Ajustement des sections à l'intérieur du main */
+  main section {
+    width: 90%; /* Plus large en portrait */
+    margin: 20px auto; /* Centrer et espacer verticalement */
+    padding: 20px; /* Ajuster padding */
+  }
 
 }
+  
 
 /* ===== Responsive Landscape ===== */
 @media (orientation: landscape) and (max-width: 768px) {
