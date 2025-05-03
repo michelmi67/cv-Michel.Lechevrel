@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault(); // Empêche le comportement par défaut du lien (saut direct)
     const id = link.getAttribute('href').slice(1); // Récupère l'id cible (#accueil -> accueil)
     showSection(id); // Affiche la section correspondante
-    history.replaceState(null, '', '#' + id); // Mets à jour l'URL sans recharger la page
+    history.replaceState(null, '', '#' + id); // Met à jour l'URL sans recharger la page
   }));
 
 });
